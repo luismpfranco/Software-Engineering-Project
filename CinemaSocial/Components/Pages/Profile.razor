@@ -1,0 +1,19 @@
+@page "/profile"
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@attribute [Authorize(Roles = "Administrator,User")]
+
+<h2 class="mt-2 text-center">Profile</h2>
+
+<h4 class="mt-2 mb-3 text-center">Username: @username</h4>
+
+@code {
+    private string username;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        username = authState.User.Identity.Name;
+    }
+}

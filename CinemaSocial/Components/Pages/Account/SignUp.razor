@@ -1,0 +1,158 @@
+@page "/signup"
+
+@using CinemaSocial.Data
+@using CinemaSocial.Models.ViewModels
+@using CinemaSocial.Models.Entities
+@using System.Security.Claims
+@using System.Security.Cryptography
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.EntityFrameworkCore
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AppDbContext appDbContext
+@inject NavigationManager navigationManager
+
+<div class="row">
+    <div class="col-lg-4 offset-lg-4 pt-4 pb-4 border">
+        <EditForm Model="@Model" OnValidSubmit="Authenticate" FormName="SignUpForm">
+            <DataAnnotationsValidator />
+            <div class="mb-3 text-center flex-column">
+                <img src="https://seeklogo.com/images/M/movie-time-cinema-logo-8B5BE91828-seeklogo.com.png" style="max-height: 5rem;" alt="avatar"/>
+                <h3 class="mt-2 text-center">Sign up</h3>
+                <h4>Create your account</h4>
+            </div>
+            <div class="mb-3">
+                <label>Name</label>
+                <InputText @bind-Value="Model.Name" class="form-control" placeholder="Name"/>
+                <ValidationMessage For="() => Model.Name"/>
+            </div>
+            <div class="mb-3">
+                <label>Username</label>
+                <InputText @bind-Value="Model.UserName" class="form-control" placeholder="Username"/>
+                <ValidationMessage For="() => Model.UserName"/>
+            </div>
+            <div class="text-center">
+                <span class="text-danger">@errorMessageUsername</span>
+            </div>
+            <div class="mb-3">
+                <label>Email</label>
+                <InputText @bind-Value="Model.Email" class="form-control" placeholder="Email"/>
+                <ValidationMessage For="() => Model.Email"/>
+            </div>
+            <div class="text-center">
+                <span class="text-danger">@errorMessageEmail</span>
+            </div>
+            <div class="mb-3">
+                <label>Password</label>
+                <InputText @bind-Value="Model.Password" class="form-control" placeholder="Password" type="password"/>
+                <ValidationMessage For="() => Model.Password"/>
+            </div>
+            <div class="mb-3">
+                <label>Repeat your password</label>
+                <InputText @bind-Value="Model.ConfirmPassword" class="form-control" placeholder="Repeat your password" type="password"/>
+                <ValidationMessage For="() => Model.ConfirmPassword"/>
+            </div>
+            <div class="mb-3">
+                <InputCheckbox @bind-Value="Model.HasAgreedToTerms" />
+                <label>I agree with your terms and conditions.</label>
+            </div>
+            <div class="mb-3 text-center">
+                <span class="text-danger">@errorMessage</span>
+            </div>
+            <div class="mb-3 d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Sign up</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public HttpContext? HttpContext { get; set; }
+    
+    [SupplyParameterFromForm] 
+    public SignUpViewModel Model { get; set; } = new();
+
+    private string? errorMessage;
+    private string? errorMessageUsername;
+    private string? errorMessageEmail;
+    
+    private async Task Authenticate()
+    {
+        if (!Model.HasAgreedToTerms)
+        {
+            errorMessage = "You must agree to the terms and conditions to sign up.";
+            return;
+        }
+
+        var usernameExists = await appDbContext.UserAccounts
+            .AnyAsync(x => x.UserName == Model.UserName);
+
+        var emailExists = await appDbContext.UserAccounts
+            .AnyAsync(x => x.Email == Model.Email);
+        
+        if (usernameExists)
+        {
+            errorMessageUsername = "Username already exists.";
+            return;
+        }
+        if (emailExists)
+        {
+            errorMessageEmail = "Email already exists.";
+            return;
+        }
+
+        var (hashedPassword, salt) = HashPassword(Model.Password);
+
+        var userAccount = new UserAccount
+        {
+            Name = Model.Name,
+            UserName = Model.UserName,
+            Email = Model.Email,
+            Password = hashedPassword,
+            Salt = salt,
+            Role = "User"
+        };
+
+        await appDbContext.UserAccounts.AddAsync(userAccount);
+        await appDbContext.SaveChangesAsync();
+
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, userAccount.UserName),
+            new Claim(ClaimTypes.Role, userAccount.Role)
+        };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+
+        await HttpContext.SignInAsync(principal);
+
+        navigationManager.NavigateTo("/profile");
+    }
+    
+    private void AgreeWithTerms()
+    {
+        Model.HasAgreedToTerms = true;
+    }
+    
+    public static (string hashedPassword, string salt) HashPassword(string password)
+    {
+        var saltBytes = new byte[32];
+        using (var provider = new RNGCryptoServiceProvider())
+        {
+            provider.GetBytes(saltBytes);
+        }
+
+        var salt = Convert.ToBase64String(saltBytes);
+
+        var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, 10000);
+        var hashBytes = pbkdf2.GetBytes(20);
+        var hashedPassword = Convert.ToBase64String(hashBytes);
+
+        return (hashedPassword, salt);
+    }
+}
+
+

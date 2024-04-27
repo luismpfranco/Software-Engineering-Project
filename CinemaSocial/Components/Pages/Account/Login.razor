@@ -1,0 +1,94 @@
+@page "/login"
+
+@using CinemaSocial.Data
+@using CinemaSocial.Models.ViewModels
+@using System.Security.Claims
+@using System.Security.Cryptography
+@using Microsoft.AspNetCore.Authentication
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AppDbContext appDbContext
+@inject NavigationManager navigationManager
+
+<div class="row">
+    <div class="col-lg-4 offset-lg-4 pt-4 pb-4 border">
+        <EditForm Model="@Model" OnValidSubmit="Authenticate" FormName="LoginForm">
+            <DataAnnotationsValidator />
+            <div class="mb-3 text-center flex-column">
+                <img src="https://seeklogo.com/images/M/movie-time-cinema-logo-8B5BE91828-seeklogo.com.png" style="max-height: 5rem;" alt="avatar"/>
+                <h3 class="mt-2 text-center">Login</h3>
+                <h4>Access your account</h4>
+            </div>
+            <div class="mb-3">
+                <label>Username</label>
+                <InputText @bind-Value="Model.UserName" class="form-control" placeholder="Username"/>
+                <ValidationMessage For="() => Model.UserName"/>
+            </div>
+            <div class="mb-3">
+                <label>Password</label>
+                <InputText @bind-Value="Model.Password" class="form-control" placeholder="Password" type="password"/>
+                <ValidationMessage For="() => Model.Password"/>
+            </div>
+            <div class="mb-3 text-center">
+                <span class="text-danger">@errorMessage</span>
+            </div>
+            <div class="mb-3 d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [CascadingParameter]
+    public HttpContext? HttpContext { get; set; }
+    
+    [SupplyParameterFromForm] 
+    public LoginViewModel Model { get; set; } = new();
+
+    private string? errorMessage;
+    
+    private async Task Authenticate()
+    {
+        var userAccount = appDbContext.UserAccounts.Where(x => x.UserName == Model.UserName).FirstOrDefault();
+    
+        if (userAccount is null)
+        {
+            errorMessage = "Invalid UserName or Password";
+            return;
+        }
+
+        var (hashedPassword, _) = HashPassword(Model.Password, Convert.FromBase64String(userAccount.Salt));
+
+        if (userAccount.Password != hashedPassword)
+        {
+            errorMessage = "Invalid UserName or Password";
+            return;
+        }
+
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Name, userAccount.UserName),
+            new Claim(ClaimTypes.Role, userAccount.Role)
+        };
+
+        var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        var principal = new ClaimsPrincipal(identity);
+        await HttpContext.SignInAsync(principal);
+        navigationManager.NavigateTo("/profile");
+    }
+    
+    public static (string hashedPassword, string salt) HashPassword(string password, byte[] saltBytes)
+    {
+        var salt = Convert.ToBase64String(saltBytes);
+
+        var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, 10000);
+        var hashBytes = pbkdf2.GetBytes(20);
+        var hashedPassword = Convert.ToBase64String(hashBytes);
+
+        return (hashedPassword, salt);
+    }
+}
+
+
