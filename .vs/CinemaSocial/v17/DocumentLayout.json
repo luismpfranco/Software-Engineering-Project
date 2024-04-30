@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\Migrations\\20240430205731_moviesUpdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaSocial\\Migrations\\20240430205731_moviesUpdate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{FB4C1B22-9151-4509-B1A6-B63B468E901F}|CinemaSocial\\CinemaSocial.csproj|c:\\users\\maria catarina\\downloads\\es-cinema-social\\cinemasocial\\api\\profileapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FB4C1B22-9151-4509-B1A6-B63B468E901F}|CinemaSocial\\CinemaSocial.csproj|solutionrelative:cinemasocial\\api\\profileapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{FB4C1B22-9151-4509-B1A6-B63B468E901F}|CinemaSocial\\CinemaSocial.csproj|c:\\users\\maria catarina\\downloads\\es-cinema-social\\cinemasocial\\models\\entities\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FB4C1B22-9151-4509-B1A6-B63B468E901F}|CinemaSocial\\CinemaSocial.csproj|solutionrelative:cinemasocial\\models\\entities\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,8 +14,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProfileAPI.cs",
+              "DocumentMoniker": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\API\\ProfileAPI.cs",
+              "RelativeDocumentMoniker": "CinemaSocial\\API\\ProfileAPI.cs",
+              "ToolTip": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\API\\ProfileAPI.cs",
+              "RelativeToolTip": "CinemaSocial\\API\\ProfileAPI.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-30T21:01:41.338Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:14:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
@@ -49,32 +54,6 @@
               "Name": "ST:19:0:{fabf9319-47eb-497e-b8f6-d9f73fba5f55}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "20240430205731_moviesUpdate.cs",
-              "DocumentMoniker": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\Migrations\\20240430205731_moviesUpdate.cs",
-              "RelativeDocumentMoniker": "CinemaSocial\\Migrations\\20240430205731_moviesUpdate.cs",
-              "ToolTip": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\Migrations\\20240430205731_moviesUpdate.cs",
-              "RelativeToolTip": "CinemaSocial\\Migrations\\20240430205731_moviesUpdate.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T20:57:31.402Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Image.cs",
-              "DocumentMoniker": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\Models\\Entities\\Image.cs",
-              "RelativeDocumentMoniker": "CinemaSocial\\Models\\Entities\\Image.cs",
-              "ToolTip": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\Models\\Entities\\Image.cs",
-              "RelativeToolTip": "CinemaSocial\\Models\\Entities\\Image.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T20:55:30.281Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
@@ -84,24 +63,27 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:1909011089:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2128998111:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:996333369:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ProfileAPI.cs",
-              "DocumentMoniker": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\API\\ProfileAPI.cs",
-              "RelativeDocumentMoniker": "CinemaSocial\\API\\ProfileAPI.cs",
-              "ToolTip": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\API\\ProfileAPI.cs",
-              "RelativeToolTip": "CinemaSocial\\API\\ProfileAPI.cs",
-              "ViewState": "AQIAAEIAAAAAAAAAAAAYwFAAAAA5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T20:53:21.871Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:47827774:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:570914822:0:{bf84ea66-d821-4dba-b1b1-2777d8574775}"
             }
           ]
         },

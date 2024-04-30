@@ -32,7 +32,7 @@ var types = new[]
 /*builder.Services.AddSingleton<IFactory>(sp => new Factory(types));
 builder.Services.AddDbContext<GameContext>(ServiceLifetime.Transient);
 builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>();*/
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:5053") });
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:7237") });
 
 
 var app = builder.Build();

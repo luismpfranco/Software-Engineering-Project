@@ -1,39 +1,39 @@
 {
   "Files": [
     {
-      "Id": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/obj/Debug/net8.0/scopedcss/projectbundle/CinemaSocial.bundle.scp.css",
-      "PackagePath": "staticwebassets/CinemaSocial.bundle.scp.css"
+      "Id": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CinemaSocial.bundle.scp.css",
+      "PackagePath": "staticwebassets\\CinemaSocial.bundle.scp.css"
     },
     {
-      "Id": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/app.css",
-      "PackagePath": "staticwebassets/app.css"
+      "Id": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
     },
     {
-      "Id": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/bootstrap/bootstrap.min.css",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css"
+      "Id": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/bootstrap/bootstrap.min.css.map",
-      "PackagePath": "staticwebassets/bootstrap/bootstrap.min.css.map"
+      "Id": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/favicon.png",
-      "PackagePath": "staticwebassets/favicon.png"
+      "Id": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.CinemaSocial.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.CinemaSocial.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.CinemaSocial.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.CinemaSocial.props",
       "PackagePath": "build\\CinemaSocial.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.CinemaSocial.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.CinemaSocial.props",
       "PackagePath": "buildMultiTargeting\\CinemaSocial.props"
     },
     {
-      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.CinemaSocial.props",
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.CinemaSocial.props",
       "PackagePath": "buildTransitive\\CinemaSocial.props"
     }
   ],
