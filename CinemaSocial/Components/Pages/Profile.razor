@@ -1,8 +1,10 @@
 @page "/profile"
+@using CinemaSocial.Models.Entities
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @attribute [Authorize(Roles = "Administrator,User")]
+@inject HttpClient client
 
 <h2 class="mt-2 text-center">Profile</h2>
 
@@ -10,10 +12,13 @@
 
 @code {
     private string username;
+    UserAccount profile;
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         username = authState.User.Identity.Name;
+        profile = await client.GetFromJsonAsync<UserAccount>("api/profile");
     }
+
 }

@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security;
+using CinemaSocial.Data;
 
 namespace CinemaSocial.Models.Entities;
 

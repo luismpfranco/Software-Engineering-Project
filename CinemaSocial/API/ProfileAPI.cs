@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaSocial.API;
-[Route("api/profile")]
+[Route("api/database")]
 [ApiController]
 public class DatabaseAPI : ControllerBase
 {
