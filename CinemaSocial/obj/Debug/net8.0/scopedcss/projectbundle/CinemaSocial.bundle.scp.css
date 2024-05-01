@@ -201,3 +201,15 @@ main[b-easca1yz8s] {
         overflow-y: auto;
     }
 }
+/* _content/CinemaSocial/Components/Pages/Home.razor.rz.scp.css */
+.small-image[b-wdcrb56ale]{
+    width: 100%;
+    height: auto;
+    max-height: 50px;
+}
+
+.horizontal-scroll[b-wdcrb56ale] {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}

@@ -12,13 +12,11 @@
 
 @code {
     private string username;
-    UserAccount profile;
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         username = authState.User.Identity.Name;
-        profile = await client.GetFromJsonAsync<UserAccount>("api/profile");
     }
 
 }

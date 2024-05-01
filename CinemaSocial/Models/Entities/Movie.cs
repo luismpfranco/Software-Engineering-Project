@@ -21,5 +21,14 @@ namespace CinemaSocial.Models.Entities
         public int Rank { get; set; }
         public string Rating { get; set; }
         public string Year { get; set; }
+        
+        public Movie()
+        {
+            Director = new List<Director>();
+            Writers = new List<Writer>();
+            Stars = new List<Star>();
+            Genre = new List<Genre>();
+            Images = new List<Image>();
+        }
     }
 }

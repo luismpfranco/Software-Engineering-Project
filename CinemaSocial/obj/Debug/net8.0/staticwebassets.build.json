@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "cs4UcVB4ydRt8KMbgdhzSw2BsEqr4mSeMj+IMf5MePo=",
+  "Hash": "EwCpvMJwLu6x1C502lJF4jBIcyhV8ZmeHLhQYqztoDM=",
   "Source": "CinemaSocial",
   "BasePath": "_content/CinemaSocial",
   "Mode": "Default",
@@ -8,19 +8,19 @@
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "CinemaSocial\\wwwroot",
+      "Name": "CinemaSocial/wwwroot",
       "Source": "CinemaSocial",
-      "ContentRoot": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\",
+      "ContentRoot": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/",
       "BasePath": "_content/CinemaSocial",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CinemaSocial.styles.css",
+      "Identity": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/obj/Debug/net8.0/scopedcss/bundle/CinemaSocial.styles.css",
       "SourceId": "CinemaSocial",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/obj/Debug/net8.0/scopedcss/bundle/",
       "BasePath": "_content/CinemaSocial",
       "RelativePath": "CinemaSocial.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\obj\\Debug\\net8.0\\scopedcss\\bundle\\CinemaSocial.styles.css"
+      "OriginalItemSpec": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/obj/Debug/net8.0/scopedcss/bundle/CinemaSocial.styles.css"
     },
     {
-      "Identity": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CinemaSocial.bundle.scp.css",
+      "Identity": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/obj/Debug/net8.0/scopedcss/projectbundle/CinemaSocial.bundle.scp.css",
       "SourceId": "CinemaSocial",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "ContentRoot": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/obj/Debug/net8.0/scopedcss/projectbundle/",
       "BasePath": "_content/CinemaSocial",
       "RelativePath": "CinemaSocial.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\CinemaSocial.bundle.scp.css"
+      "OriginalItemSpec": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/obj/Debug/net8.0/scopedcss/projectbundle/CinemaSocial.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\app.css",
+      "Identity": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/app.css",
       "SourceId": "CinemaSocial",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\",
+      "ContentRoot": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/",
       "BasePath": "_content/CinemaSocial",
       "RelativePath": "app.css",
       "AssetKind": "All",
@@ -71,13 +71,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\app.css"
+      "OriginalItemSpec": "wwwroot/app.css"
     },
     {
-      "Identity": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "Identity": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/bootstrap/bootstrap.min.css",
       "SourceId": "CinemaSocial",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\",
+      "ContentRoot": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/",
       "BasePath": "_content/CinemaSocial",
       "RelativePath": "bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -90,13 +90,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css"
+      "OriginalItemSpec": "wwwroot/bootstrap/bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/bootstrap/bootstrap.min.css.map",
       "SourceId": "CinemaSocial",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\",
+      "ContentRoot": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/",
       "BasePath": "_content/CinemaSocial",
       "RelativePath": "bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -109,13 +109,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\bootstrap\\bootstrap.min.css.map"
+      "OriginalItemSpec": "wwwroot/bootstrap/bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\favicon.png",
+      "Identity": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/favicon.png",
       "SourceId": "CinemaSocial",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\wwwroot\\",
+      "ContentRoot": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/",
       "BasePath": "_content/CinemaSocial",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -128,7 +128,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\favicon.png"
+      "OriginalItemSpec": "wwwroot/favicon.png"
     }
   ]
 }

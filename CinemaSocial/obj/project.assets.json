@@ -2520,31 +2520,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Maria Catarina\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/luismpfranco/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\CinemaSocial.csproj",
+      "projectUniqueName": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/CinemaSocial.csproj",
       "projectName": "CinemaSocial",
-      "projectPath": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\CinemaSocial.csproj",
-      "packagesPath": "C:\\Users\\Maria Catarina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Maria Catarina\\Downloads\\es-cinema-social\\CinemaSocial\\obj\\",
+      "projectPath": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/CinemaSocial.csproj",
+      "packagesPath": "/Users/luismpfranco/.nuget/packages/",
+      "outputPath": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Maria Catarina\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/luismpfranco/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -2611,7 +2604,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

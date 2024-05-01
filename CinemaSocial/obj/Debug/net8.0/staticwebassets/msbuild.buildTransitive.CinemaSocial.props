@@ -1,3 +1,3 @@
 ﻿<Project>
-  <Import Project="..\buildMultiTargeting\CinemaSocial.props" />
+  <Import Project="../buildMultiTargeting/CinemaSocial.props" />
 </Project>

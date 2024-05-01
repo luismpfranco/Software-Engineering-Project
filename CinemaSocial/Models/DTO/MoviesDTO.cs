@@ -1,4 +1,7 @@
-﻿namespace CinemaSocial.Models.DTO
+﻿using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Components.Web;
+
+namespace CinemaSocial.Models.DTO
 {
     public class MoviesDTO
     {
@@ -15,6 +18,8 @@
         public int Rank { get; set; }
         public string Rating { get; set; }
         public string Year { get; set; }
+
+        public Movie Movie { get; set; }
 
     }
 }

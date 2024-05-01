@@ -76,7 +76,7 @@
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
         await HttpContext.SignInAsync(principal);
-        navigationManager.NavigateTo("/profile");
+        navigationManager.NavigateTo("/");
     }
     
     public static (string hashedPassword, string salt) HashPassword(string password, byte[] saltBytes)

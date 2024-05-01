@@ -11,5 +11,6 @@ namespace CinemaSocial.Models.Entities
         public string Description { get; set; }
 
         public Guid IdMovie { get; set; }
+        public Movie Movie { get; set; }
     }
 }

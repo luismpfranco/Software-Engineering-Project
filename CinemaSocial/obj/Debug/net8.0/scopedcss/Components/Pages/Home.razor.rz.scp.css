@@ -1,0 +1,11 @@
+.small-image[b-wdcrb56ale]{
+    width: 100%;
+    height: auto;
+    max-height: 50px;
+}
+
+.horizontal-scroll[b-wdcrb56ale] {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
