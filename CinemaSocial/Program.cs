@@ -1,5 +1,4 @@
 using CinemaSocial.Components;
-using CinemaSocial.Components.Pages.Account;
 using CinemaSocial.Data;
 using CinemaSocial.Models.Entities;
 using CinemaSocial.Services;

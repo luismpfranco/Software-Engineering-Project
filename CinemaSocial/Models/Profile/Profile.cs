@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace CinemaSocial.Models.Profile;
 
 public class Profile

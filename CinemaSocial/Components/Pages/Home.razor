@@ -1,15 +1,12 @@
 ﻿@page "/"
-@using CinemaSocial.Models.DTO
 @using CinemaSocial.Models.Entities
 @using CinemaSocial.Services
 @using CinemaSocial.Components.Pages.Movies
 @inject IMovieService MovieService
-@inject NavigationManager navigationManager
 
 <PageTitle>Home</PageTitle>
 
 <div class="row col-12">
-    <h2 class="display-12 fw-bolder">Welcome to <span class="text-danger">CinemaSocial</span></h2>
     <AuthorizeView>
         <NotAuthorized>
             <span>You are not logged in. Please <a class="fw-bolder" href="/login">click here</a> to login.</span>
@@ -26,7 +23,7 @@
                 </div>
                 <h3 class="display-12 text-danger">Top 10</h3>
                 <div class="d-flex flex-md-row justify-content-between my-3">
-                    <div class=" flex-nowrap display-flex w-100 h-auto mh-50 overflow-auto row row-cols-2 row-cols-lg-5 row-cols-xl-4 justify-content-center justify-content-md-start">
+                    <div class="flex-nowrap display-flex w-100 h-auto mh-50 overflow-auto row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
                         @if (MoviesTop10.Count > 0)
                         {
 
@@ -53,28 +50,35 @@
                         }
                     </div>
                 </div>
-                @if (PopularMovies.Count > 0)
-                {
-                    @foreach (Movie movie in PopularMovies)
-                    {
-                        <div class="col my-3 py-3">
-                            <MovieCard Movie="movie"/>
-                        </div>
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        <div class="col">
-                            <MovieCard/>
-                        </div>
-                    }
-                }
+                <h3 class="pt-5 display-12 text-danger">Most Popular Movies</h3>
+                <div class="d-flex flex-md-row justify-content-between my-3">
+                    <div class="w-100 h-auto mh-50 row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
+                
+                        @if (PopularMovies.Count > 0)
+                        {
+                            @foreach (Movie movie in PopularMovies)
+                            {
+                                <div class="col my-3">
+                                    <MovieCard Movie="movie"/>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                <div class="col">
+                                    <MovieCard/>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                
                 @*
                 <Paginator TotalPages="@TotalPages" CurrentPage="@CurrentPage" OnPageChanged="HandlePageChanged" />
             *@
-                <div>
+                @*<div>
                     <input type="button" class="btn-lg btn" id="prev" @onclick="PrevPage" value="Previous"/>
                     @for(int i = CurrentPage - 2; i <= CurrentPage + 2; i++)
                     {
@@ -92,7 +96,7 @@
                         }
                     }
                     <input type="button" class="btn-lg btn" id="next" @onclick="NextPage" value="Next"/>
-                </div>
+                </div>*@
             </Authorized>
         </AuthorizeView>
     </div>
@@ -101,68 +105,15 @@
 @code {
     private List<Movie> MoviesTop10 { get; set; }
     private List<Movie> PopularMovies { get; set; }
-    private int TotalPages { get; set; }
-    [Parameter] 
-    public string CurrentPageParam { get; set; } = "1";
-    public int CurrentPage { get; set; } = 1;
     
     protected override async Task OnInitializedAsync()
     {
         MoviesTop10 = (await MovieService.GetMoviesAsync()).OrderBy(m => m.Rank).Take(10).ToList();
-
-        var uri = new Uri(navigationManager.Uri);
-        if (int.TryParse(CurrentPageParam, out var page))
-        {
-            CurrentPage = page;
-        }
-        else
-        {
-            CurrentPage = 1;
-        }
-
-        await LoadPage();
-    }
-    
-    private async Task LoadPage(int page)
-    {
-        CurrentPage = page;
         await LoadPage();
     }
 
     private async Task LoadPage()
     {
-        PopularMovies = (await MovieService.GetMoviesAsyncWithPages(CurrentPage)).ToList();
-        TotalPages = await MovieService.GetTotalPages();
-        if(CurrentPage != 1)
-            navigationManager.NavigateTo($"/{CurrentPage}");
-    }
-
-    private async Task NextPage()
-    {
-        if(CurrentPage < TotalPages)
-        {
-            CurrentPage++;
-            await LoadPage();
-        }
-    }
-    
-    private async Task PrevPage()
-    {
-        if(CurrentPage > 1)
-        {
-            CurrentPage--;
-            await LoadPage();
-        }
-    }
-    
-    private async Task HandlePageChanged(int page)
-    {
-        if (page != CurrentPage)
-        {
-            await LoadPage(page);
-            StateHasChanged();
-            
-            
-        }
+        PopularMovies = (await MovieService.GetMoviesAsync()).OrderBy(m => m.Rank).Skip(10).ToList();
     }
 }

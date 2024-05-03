@@ -1,10 +1,9 @@
 @page "/profile"
-@using CinemaSocial.Models.Entities
 @using Microsoft.AspNetCore.Authorization
-@using Microsoft.AspNetCore.Components.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @attribute [Authorize(Roles = "Administrator,User")]
-@inject HttpClient client
+
+<h2 class="display-12 fw-bolder">Welcome to <span class="text-danger">CinemaSocial</span></h2>
 
 <h2 class="mt-2 text-center">Profile</h2>
 

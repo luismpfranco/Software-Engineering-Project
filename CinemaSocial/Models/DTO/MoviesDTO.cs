@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Microsoft.AspNetCore.Components.Web;
+﻿using CinemaSocial.Models.Entities;
 
 namespace CinemaSocial.Models.DTO
 {

@@ -1,4 +1,5 @@
 @using CinemaSocial.Models.Entities
+@inject IJSRuntime JS
 
 @{
     Image image = null;
@@ -10,24 +11,22 @@
 
 @if (Movie is not null)
 {
-    <div class="">
+    <div class="card h-100 fade-in" @ref="posterCardElement">
         @if (image != null)
         {
             <img src="@image.Url" class="card-img-top" alt="Movie Poster"/>
+            <div class="card-body p-2 border-top bg-light">
+                <h5 class="card-title">@Movie.Title</h5>
+                <p class="card-text">@Movie.Year</p>
+            </div>
+            <div class="card-footer p-1 text-end">
+                <a class="btn btn-primary col-6" href="/movie/@Movie.IdMovie">Details</a>
+            </div>
         }
         else
         {
             <img src="https://ih1.redbubble.net/image.1349748792.1068/fposter,small,wall_texture,square_product,600x600.u1.jpg" class="card-img-top" alt="Movie Poster"/>
         }
-
-        <div class="">
-            <h5 class="card-title">@Movie.Title</h5>
-            <p class="card-text">@Movie.Year</p>
-        </div>
-        <div class="">
-            <a class="btn btn-primary" href="/movie/@Movie.IdMovie">Details</a>
-        </div>
-        
     </div>
 }
 else
@@ -49,7 +48,31 @@ else
 }
 
 @code {
+    private ElementReference posterCardElement;
+    
     [Parameter]
     public Movie Movie { get; set; }
+    
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JS.InvokeVoidAsync("console.log", "OnAfterRenderAsync called");
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("console.log", "OnAfterRenderAsync: first render");
+            await JS.InvokeVoidAsync("console.log", "Initializing VanillaTilt on posterCardElement");
+            await JS.InvokeVoidAsync("console.log", posterCardElement);
+            await JS.InvokeVoidAsync("VanillaTilt.init", posterCardElement, new
+            {
+                max = 15,
+                speed = 300
+            });
+            await JS.InvokeVoidAsync("console.log", "VanillaTilt initialized");
+        }
+    }
+
+    public void Dispose()
+    {
+        JS.InvokeVoidAsync("VanillaTilt.destroy", posterCardElement);
+    }
     
 }

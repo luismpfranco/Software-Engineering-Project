@@ -6,8 +6,6 @@
 @using System.Security.Cryptography
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.AspNetCore.Authentication.Cookies
-@using Microsoft.AspNetCore.Components.Authorization
-@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject AppDbContext appDbContext
 @inject NavigationManager navigationManager
 
@@ -76,7 +74,7 @@
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
         await HttpContext.SignInAsync(principal);
-        navigationManager.NavigateTo("/");
+        navigationManager.NavigateTo("/profile");
     }
     
     public static (string hashedPassword, string salt) HashPassword(string password, byte[] saltBytes)
