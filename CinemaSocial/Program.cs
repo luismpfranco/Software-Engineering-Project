@@ -34,6 +34,7 @@ var types = new[]
 builder.Services.AddDbContext<GameContext>(ServiceLifetime.Transient);*/
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:7237") });
 builder.Services.AddScoped<IMovieService, MovieService>();
+builder.Services.AddScoped<WatchlistService>();
 
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())

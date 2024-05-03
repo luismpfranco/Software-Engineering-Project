@@ -50,7 +50,7 @@
     private async Task Authenticate()
     {
         var userAccount = appDbContext.UserAccounts.Where(x => x.UserName == Model.UserName).FirstOrDefault();
-    
+
         if (userAccount is null)
         {
             errorMessage = "Invalid UserName or Password";
@@ -68,7 +68,8 @@
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, userAccount.UserName),
-            new Claim(ClaimTypes.Role, userAccount.Role)
+            new Claim(ClaimTypes.Role, userAccount.Role),
+            new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()) // Convert the Id to a string
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

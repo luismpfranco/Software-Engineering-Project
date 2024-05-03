@@ -26,16 +26,13 @@ namespace CinemaSocial.Migrations
                     b.Property<Guid>("IdMovie")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("MovieIdMovie")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieIdMovie");
+                    b.HasIndex("IdMovie");
 
                     b.ToTable("diretors");
                 });
@@ -53,12 +50,9 @@ namespace CinemaSocial.Migrations
                     b.Property<Guid>("IdMovie")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("MovieIdMovie")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieIdMovie");
+                    b.HasIndex("IdMovie");
 
                     b.ToTable("genres");
                 });
@@ -72,9 +66,6 @@ namespace CinemaSocial.Migrations
                     b.Property<Guid>("IdMovie")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("MovieIdMovie")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("NumberUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -85,7 +76,7 @@ namespace CinemaSocial.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieIdMovie");
+                    b.HasIndex("IdMovie");
 
                     b.ToTable("images");
                 });
@@ -137,16 +128,13 @@ namespace CinemaSocial.Migrations
                     b.Property<Guid>("IdMovie")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("MovieIdMovie")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieIdMovie");
+                    b.HasIndex("IdMovie");
 
                     b.ToTable("stars");
                 });
@@ -202,53 +190,160 @@ namespace CinemaSocial.Migrations
                     b.Property<Guid>("IdMovie")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid?>("MovieIdMovie")
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MovieIdMovie");
+                    b.HasIndex("IdMovie");
 
                     b.ToTable("writers");
                 });
 
+            modelBuilder.Entity("CinemaSocial.Models.Watchlists.WatchlistFavourites", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("MovieId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("WatchlistFavourites");
+                });
+
+            modelBuilder.Entity("CinemaSocial.Models.Watchlists.WatchlistToWatch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("MovieId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("WatchlistToWatch");
+                });
+
+            modelBuilder.Entity("CinemaSocial.Models.Watchlists.WatchlistWatched", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("MovieId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("WatchlistWatched");
+                });
+
             modelBuilder.Entity("CinemaSocial.Models.Entities.Director", b =>
                 {
-                    b.HasOne("CinemaSocial.Models.Entities.Movie", null)
+                    b.HasOne("CinemaSocial.Models.Entities.Movie", "Movie")
                         .WithMany("Director")
-                        .HasForeignKey("MovieIdMovie");
+                        .HasForeignKey("IdMovie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("CinemaSocial.Models.Entities.Genre", b =>
                 {
-                    b.HasOne("CinemaSocial.Models.Entities.Movie", null)
+                    b.HasOne("CinemaSocial.Models.Entities.Movie", "Movie")
                         .WithMany("Genre")
-                        .HasForeignKey("MovieIdMovie");
+                        .HasForeignKey("IdMovie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("CinemaSocial.Models.Entities.Image", b =>
                 {
-                    b.HasOne("CinemaSocial.Models.Entities.Movie", null)
+                    b.HasOne("CinemaSocial.Models.Entities.Movie", "Movie")
                         .WithMany("Images")
-                        .HasForeignKey("MovieIdMovie");
+                        .HasForeignKey("IdMovie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("CinemaSocial.Models.Entities.Star", b =>
                 {
-                    b.HasOne("CinemaSocial.Models.Entities.Movie", null)
+                    b.HasOne("CinemaSocial.Models.Entities.Movie", "Movie")
                         .WithMany("Stars")
-                        .HasForeignKey("MovieIdMovie");
+                        .HasForeignKey("IdMovie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("CinemaSocial.Models.Entities.Writer", b =>
                 {
-                    b.HasOne("CinemaSocial.Models.Entities.Movie", null)
+                    b.HasOne("CinemaSocial.Models.Entities.Movie", "Movie")
                         .WithMany("Writers")
-                        .HasForeignKey("MovieIdMovie");
+                        .HasForeignKey("IdMovie")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("CinemaSocial.Models.Watchlists.WatchlistFavourites", b =>
+                {
+                    b.HasOne("CinemaSocial.Models.Entities.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("CinemaSocial.Models.Watchlists.WatchlistToWatch", b =>
+                {
+                    b.HasOne("CinemaSocial.Models.Entities.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("CinemaSocial.Models.Watchlists.WatchlistWatched", b =>
+                {
+                    b.HasOne("CinemaSocial.Models.Entities.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("CinemaSocial.Models.Entities.Movie", b =>

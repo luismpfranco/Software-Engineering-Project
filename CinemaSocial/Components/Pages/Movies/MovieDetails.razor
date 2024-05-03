@@ -1,7 +1,12 @@
 @page "/movie/{id}"
 @using CinemaSocial.Models.Entities
 @using CinemaSocial.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@using System.Security.Claims
 @inject IMovieService MovieService
+
+@inject AuthenticationStateProvider authenticationStateProvider
+@inject NavigationManager navigationManager
 
 @{
     Image image = null;
@@ -67,6 +72,10 @@ else
                 <p class="text-dark">Description: @MovieInfos.Description</p>
                 <p class="text-dark">Director: @directorsNames</p>
                 <p class="text-dark">Cast: @starsNames</p>
+
+                <a class="btn btn-primary col-6" href="/movie/@MovieId/watchlists">Add to</a>
+
+                
             </div>
         </div>
     </div>
@@ -77,11 +86,31 @@ else
     public string Id { get; set; }
 
     public Guid MovieId => Guid.Parse(Id);
+
+    private int UserId { get; set; }
     
     public Movie MovieInfos { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         MovieInfos = await MovieService.GetMovieByIdAsync(MovieId);
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity.IsAuthenticated)
+        {
+            var userIdClaim = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Console.WriteLine($"{userIdClaim} is the user id");
+            if (userIdClaim == null)
+            {
+                Console.WriteLine("NameIdentifier claim is not present");
+            }
+            else
+            {
+                UserId = int.Parse(userIdClaim);
+            }
+        }
+        else
+        {
+            Console.WriteLine("User is not authenticated");
+        }
     }
 }

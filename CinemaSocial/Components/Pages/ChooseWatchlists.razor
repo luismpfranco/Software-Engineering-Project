@@ -1,0 +1,91 @@
+﻿@page "/movie/{id}/watchlists"
+@using System.Security.Claims
+@using CinemaSocial.Services
+@inject AuthenticationStateProvider authenticationStateProvider
+@inject WatchlistService WatchlistService
+
+<h3>Choose a Watchlist</h3>
+
+<button @onclick="() => AddToFavourites(MovieId)">Add to Favourites</button>
+<br/>
+<button @onclick="() => RemoveFromFavourites(MovieId)">Remove from Favourites</button>
+<br/>
+<button @onclick="() => AddToWatched(MovieId)">Add to Watched</button>
+<br/>
+<button @onclick="() => RemoveFromWatched(MovieId)">Remove from Watched</button>
+<br/>
+<button @onclick="() => AddToWatchlist(MovieId)">Add to Watchlist</button>
+<br/>
+<button @onclick="() => RemoveFromWatchlist(MovieId)">Remove from Watchlist</button>
+<br/>
+
+@code {
+    [Parameter] public string Id { get; set; }
+
+    public Guid MovieId => Guid.Parse(Id);
+
+    private int UserId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity.IsAuthenticated)
+        {
+            var userIdClaim = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            Console.WriteLine($"{userIdClaim} is the user id");
+            if (userIdClaim == null)
+            {
+                Console.WriteLine("NameIdentifier claim is not present");
+            }
+            else
+            {
+                UserId = int.Parse(userIdClaim);
+            }
+        }
+        else
+        {
+            Console.WriteLine("User is not authenticated");
+        }
+    }
+
+    private async Task AddToFavourites(Guid movieId)
+    {
+        Console.WriteLine("AddToFavourites method called");
+        Console.WriteLine($"UserId: {UserId}, MovieId: {MovieId}");
+        try
+        {
+            await WatchlistService.AddToFavouritesAsync(UserId, movieId);
+            Console.WriteLine($"{UserId} added {MovieId} to favourites");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred: {ex.Message}");
+        }
+    }
+
+    private async Task RemoveFromFavourites(Guid movieId)
+    {
+        await WatchlistService.RemoveFromFavouritesAsync(UserId, movieId);
+    }
+
+    private async Task AddToWatched(Guid movieId)
+    {
+        await WatchlistService.AddToWatchedAsync(UserId, movieId);
+    }
+
+    private async Task RemoveFromWatched(Guid movieId)
+    {
+        await WatchlistService.RemoveFromWatchedAsync(UserId, movieId);
+    }
+
+    private async Task AddToWatchlist(Guid movieId)
+    {
+        await WatchlistService.AddToWatchlistAsync(UserId, movieId);
+    }
+
+    private async Task RemoveFromWatchlist(Guid movieId)
+    {
+        await WatchlistService.RemoveFromWatchlistAsync(UserId, movieId);
+    }
+
+}
