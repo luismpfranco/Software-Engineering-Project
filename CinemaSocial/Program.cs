@@ -1,5 +1,7 @@
 using CinemaSocial.Components;
 using CinemaSocial.Data;
+using CinemaSocial.Models.Entities;
+using CinemaSocial.Services;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,18 +21,31 @@ builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlite("Data Source=cinema.db"));
 
+builder.Services.AddRazorPages();
+builder.Services.AddServerSideBlazor();
+builder.Services.AddControllers();
+
+
+var types = new[]
+{
+    typeof(UserAccount)
+};
+/*builder.Services.AddSingleton<IFactory>(sp => new Factory(types));
+builder.Services.AddDbContext<GameContext>(ServiceLifetime.Transient);*/
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("http://localhost:7237") });
+builder.Services.AddScoped<IMovieService, MovieService>();
+
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    //app.UseHsts();
+    app.UseHsts();
 }
 
-//app.UseRouting();
-//app.MapControllers();
+app.UseRouting();
+app.MapControllers();
 
-//app.MapBlazorHub();
-//app.MapFallbackToPage("/_Host");
+app.MapBlazorHub();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
@@ -38,6 +53,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseHttpsRedirection();
+
+//app.MapFallbackToPage("/login");
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

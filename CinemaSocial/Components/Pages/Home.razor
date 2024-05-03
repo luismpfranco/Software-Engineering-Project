@@ -1,24 +1,119 @@
 ﻿@page "/"
+@using CinemaSocial.Models.Entities
+@using CinemaSocial.Services
+@using CinemaSocial.Components.Pages.Movies
+@inject IMovieService MovieService
 
 <PageTitle>Home</PageTitle>
 
-<div class="row">
-    <div class="col-12">
-        <h2 class="fw-bolder">Welcome to <span class="text-danger">CinemaSocial</span></h2>
-    </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <AuthorizeView>
-                    <NotAuthorized>
-                        <span>You are not logged in. Please <a class="fw-bolder" href="/login">click here</a> to login.</span>
-                        <span>Or you can create an account. <a class="fw-bolder" href="/signup">Click here</a> to sign up.</span>
-                    </NotAuthorized>
-                    <Authorized>
-                        <span>Logged in as <b>@context.User.Identity.Name</b>. <a class="fw-bolder" href="/logout">Click here</a> to logout.</span>
-                    </Authorized>
-                </AuthorizeView>
-            </div>
-        </div>
+<div class="row col-12">
+    <AuthorizeView>
+        <NotAuthorized>
+            <span>You are not logged in. Please <a class="fw-bolder" href="/login">click here</a> to login.</span>
+            <span>Or you can create an account. <a class="fw-bolder" href="/signup">Click here</a> to sign up.</span>
+        </NotAuthorized>
+    </AuthorizeView>
+    <div class="container py-3">
+        <AuthorizeView>
+            <Authorized>
+                <div>
+                    <h1 class="display-6 text-center fw-bolder">
+                        Movies
+                    </h1>
+                </div>
+                <h3 class="display-12 text-danger">Top 10</h3>
+                <div class="d-flex flex-md-row justify-content-between my-3">
+                    <div class="flex-nowrap display-flex w-100 h-auto mh-50 overflow-auto row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
+                        @if (MoviesTop10.Count > 0)
+                        {
+
+                            @foreach (Movie movie in MoviesTop10)
+                            {
+                                <div class="col my-3">
+                                    <TopMovies Movie="movie"/>
+                                </div>
+                                @*<li>@movie.Title</li>*@
+                                @*<p>@movie.Description</p>
+                                <p>Rank: @movie.Rank</p>
+                                <p>Rating: @movie.Rating</p>
+                                <p>Year: @movie.Year</p>*@
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                <div class="col">
+                                    <MovieCard/>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <h3 class="pt-5 display-12 text-danger">Most Popular Movies</h3>
+                <div class="d-flex flex-md-row justify-content-between my-3">
+                    <div class="w-100 h-auto mh-50 row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
+                
+                        @if (PopularMovies.Count > 0)
+                        {
+                            @foreach (Movie movie in PopularMovies)
+                            {
+                                <div class="col my-3">
+                                    <MovieCard Movie="movie"/>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            for (int i = 0; i < 10; i++)
+                            {
+                                <div class="col">
+                                    <MovieCard/>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                
+                @*
+                <Paginator TotalPages="@TotalPages" CurrentPage="@CurrentPage" OnPageChanged="HandlePageChanged" />
+            *@
+                @*<div>
+                    <input type="button" class="btn-lg btn" id="prev" @onclick="PrevPage" value="Previous"/>
+                    @for(int i = CurrentPage - 2; i <= CurrentPage + 2; i++)
+                    {
+                        int j = i;
+                        @if (i > 0)
+                        {
+                            @if (i == CurrentPage)
+                            {
+                                <span class="px-2" style="font-weight: bold; cursor:pointer" @onclick="() => LoadPage(j)">@i</span>   
+                            }
+                            else
+                            {
+                                <span class="px-2" style="cursor:pointer" @onclick="() => LoadPage(j)">@i</span>
+                            }
+                        }
+                    }
+                    <input type="button" class="btn-lg btn" id="next" @onclick="NextPage" value="Next"/>
+                </div>*@
+            </Authorized>
+        </AuthorizeView>
     </div>
 </div>
+
+@code {
+    private List<Movie> MoviesTop10 { get; set; }
+    private List<Movie> PopularMovies { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        MoviesTop10 = (await MovieService.GetMoviesAsync()).OrderBy(m => m.Rank).Take(10).ToList();
+        await LoadPage();
+    }
+
+    private async Task LoadPage()
+    {
+        PopularMovies = (await MovieService.GetMoviesAsync()).OrderBy(m => m.Rank).Skip(10).ToList();
+    }
+}

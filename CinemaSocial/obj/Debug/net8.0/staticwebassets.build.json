@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "EwCpvMJwLu6x1C502lJF4jBIcyhV8ZmeHLhQYqztoDM=",
+  "Hash": "DoJB8tswuyWUA/Hmo0D7BRkjrsp+W0ufl18Zg+fhGpk=",
   "Source": "CinemaSocial",
   "BasePath": "_content/CinemaSocial",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.png"
+    },
+    {
+      "Identity": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/js/vanilla-tilt.min.js",
+      "SourceId": "CinemaSocial",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/wwwroot/",
+      "BasePath": "_content/CinemaSocial",
+      "RelativePath": "js/vanilla-tilt.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/vanilla-tilt.min.js"
     }
   ]
 }

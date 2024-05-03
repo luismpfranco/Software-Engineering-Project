@@ -1,0 +1,87 @@
+@page "/movie/{id}"
+@using CinemaSocial.Models.Entities
+@using CinemaSocial.Services
+@inject IMovieService MovieService
+
+@{
+    Image image = null;
+    string genreDescription = null;
+    string directorsNames = null;
+    string starsNames = null;
+    if (MovieInfos != null)
+    {
+        image = MovieInfos.Images.FirstOrDefault(i => i.NumberUrl == "190");
+        genreDescription = string.Join(", ", MovieInfos.Genre.Select(g => g.Description));
+        directorsNames = string.Join(", ", MovieInfos.Director.Select(d => d.Name));
+        starsNames = string.Join(", ", MovieInfos.Stars.Select(s => s.Name));
+    }
+}
+
+@if (Id is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <PageTitle>@MovieInfos.Title</PageTitle>
+    <div class="hero-bg">
+        <div class="hero-container">
+            <div class="container-xxl d-flex flex-column flex-md-row">
+                <div class="flex-grow-1 d-flex align-items-center justify-content-center">
+                    <div class="title-container text-center">
+                        <h1 class="text-dark">@MovieInfos.Title</h1>
+                        
+                        <img src="@image.Url" class="" alt="Movie Poster"/>
+                        
+                        <div class="movie-links">
+                            <div class="d-flex justify-content-center p-3">
+                                @if (!string.IsNullOrEmpty(@MovieInfos.ImdbId))
+                                {
+                                    <div class="text-center px-2">
+                                        <a href="@MovieInfos.Link" target="_blank" class="btn btn-outline-warning rounded-pill">IMDB</a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="order-last order-md-first d-flex justify-content-center">
+                        <div class="poster-container">
+                            @if (string.IsNullOrEmpty(image.Url))
+                            {
+                                <img class="bg-light" src="https://ih1.redbubble.net/image.1349748792.1068/fposter,small,wall_texture,square_product,600x600.u1.jpg" alt="Movie Poster"/>
+                            }
+                            else
+                            {
+                                <img class="bg-light" src="@image.Url" alt="Movie Poster"/>
+                            }
+                        </div>
+                    </div>*@
+                </div>
+            </div>
+        </div>
+        <div class="container-xxl">
+            <div class="overview d-flex flex-column">
+                <p class="text-dark">Rating: @MovieInfos.Rating</p>
+                <p class="text-dark">Year: @MovieInfos.Year</p>
+                <p class="text-dark">Genre: @genreDescription</p>
+                <p class="text-dark">Description: @MovieInfos.Description</p>
+                <p class="text-dark">Director: @directorsNames</p>
+                <p class="text-dark">Cast: @starsNames</p>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+
+    public Guid MovieId => Guid.Parse(Id);
+    
+    public Movie MovieInfos { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        MovieInfos = await MovieService.GetMovieByIdAsync(MovieId);
+    }
+}

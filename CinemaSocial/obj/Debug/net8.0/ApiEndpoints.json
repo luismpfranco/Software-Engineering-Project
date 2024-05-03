@@ -1,0 +1,12 @@
+[
+  {
+    "ContainingType": "CinemaSocial.API.DatabaseAPI",
+    "Method": "GetProfile",
+    "RelativePath": "api/database",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
