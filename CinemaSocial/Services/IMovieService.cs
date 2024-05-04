@@ -5,5 +5,5 @@ namespace CinemaSocial.Services;
 public interface IMovieService
 {
     Task<List<Movie>> GetMoviesAsync();
-    Task<Movie> GetMovieByIdAsync(Guid id);
+    Task<Movie?> GetMovieByIdAsync(Guid id);
 }

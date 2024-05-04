@@ -6,28 +6,26 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-            <AuthorizeView>
-                <NotAuthorized>
-                    <span><a href="/login">Login</a></span>
-                    <span><a href="/signup">Sign up</a></span>
-                </NotAuthorized>
-                <Authorized>
-                    <a href="/logout">Logout</a>
-                </Authorized>
-            </AuthorizeView>
-        </div>
+        <nav class="navbar navbar-expand navbar-light bg-light px-4">
+            <a class="navbar-brand" href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+            <div class="navbar-nav ml-auto">
+                <AuthorizeView>
+                    <NotAuthorized>
+                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/signup">Sign up</a>
+                    </NotAuthorized>
+                    <Authorized>
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </Authorized>
+                </AuthorizeView>
+            </div>
+        </nav>
 
         <article class="content px-4">
             @Body
         </article>
     </main>
 </div>
-
-
-<script type="text/javascript" src="js/vanilla-tilt.min.js"></script>
-
 <div id="blazor-error-ui">
     An unhandled error has occurred.
     <a href="" class="reload">Reload</a>

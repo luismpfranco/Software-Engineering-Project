@@ -2,6 +2,7 @@ using CinemaSocial.Components.Pages;
 using CinemaSocial.Models.Entities;
 using CinemaSocial.Models.Watchlists;
 using Microsoft.EntityFrameworkCore;
+using Review = CinemaSocial.Models.Entities.Review;
 
 namespace CinemaSocial.Data;
 
@@ -46,8 +47,9 @@ public class AppDbContext : DbContext
     public DbSet<Star> Stars { get; set; }
     public DbSet<Image> Images { get; set; }
     public DbSet<Genre> Genres { get; set; }
-    public DbSet<Movie> Movies { get; set; }
+    public DbSet<Movie?> Movies { get; set; }
     public DbSet<WatchlistFavourites> WatchlistFavourites { get; set; }
     public DbSet<WatchlistWatched> WatchlistWatched { get; set; }
     public DbSet<WatchlistToWatch> WatchlistToWatch { get; set; }
+    public DbSet<Review> Reviews { get; set; }
 }

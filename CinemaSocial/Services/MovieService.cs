@@ -24,7 +24,7 @@ public class MovieService : IMovieService
             .ToListAsync();
     }
     
-    public async Task<Movie> GetMovieByIdAsync(Guid id)
+    public async Task<Movie?> GetMovieByIdAsync(Guid id)
     {
         return await _context.Movies
             .Include(m => m.Director)

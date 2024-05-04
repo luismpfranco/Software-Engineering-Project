@@ -127,6 +127,8 @@
 
         await HttpContext.SignInAsync(principal);
 
+        AgreeWithTerms();
+
         navigationManager.NavigateTo("/profile");
     }
     

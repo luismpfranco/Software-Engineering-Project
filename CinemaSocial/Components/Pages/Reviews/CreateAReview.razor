@@ -1,0 +1,134 @@
+@page "/reviews/create"
+@using System.Security.Claims
+@using CinemaSocial.Models.Entities
+@using CinemaSocial.Services
+@using Microsoft.AspNetCore.Authorization
+@inject MovieService MovieService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject ReviewService ReviewService
+@rendermode InteractiveServer
+
+@attribute [Authorize(Roles = "Administrator,User")]
+<h3>Create a Review</h3>
+
+@if (_selectedMovie == null)
+{
+    <div class="input-group mt-3 mb-3">
+        <input type="text" class="form-control" placeholder="@_selectedMovieTitle" value="@_searchTerm" @oninput="UpdateSearchResults">
+    </div>
+    <div class="d-flex justify-content-center @(_isFavouritesSuccessful == true ? "text-success" : "text-danger")">@_messageFavourites</div>
+    @if (_searchResults != null && _searchResults.Any())
+    {
+        <div class="dropdown-menu show" style="max-height: 400px; overflow-y: auto;">
+            @foreach (var movie in _searchResults)
+            {
+                <a class="dropdown-item" @onclick="() => SelectMovie(movie.Title)">@movie.Title</a>
+            }
+        </div>
+    }
+}
+else
+{
+    var image = _selectedMovie.Images.FirstOrDefault();
+    <div class="mt-5 row">
+        <div class="col-md-3">
+            <img src="@image.Url" alt="@_selectedMovie.Title" style="float: right; max-width: 100%;"/>
+        </div>
+        <div class="col-md-9 d-flex flex-column">
+            <h4 class="p-2">@_selectedMovie.Title</h4>
+            <p class="p-2">Year: @_selectedMovie.Year</p>
+            <p class="p-2">Genres:
+                @foreach (var genre in _selectedMovie.Genre)
+                {
+                    if (genre == _selectedMovie.Genre.Last())
+                    {
+                        <span>@genre.Description</span>
+                    }
+                    else
+                    {
+                        <span>@genre.Description, </span>
+                    }
+                }
+            </p>
+            <p class="p-2">Rating: @_selectedMovie.Rating</p>
+            <p class="p-2">Description: @_selectedMovie.Description</p>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="card mt-5 p-3 bg-light d-inline-block border border-secondary" style="border-radius: 20px;">
+            <div class="card-body">
+                <div>
+                    <label for="rating">Rating:</label>
+                    <select id="rating" @bind="_rating" required>
+                        <option value="">Select a rating</option>
+                        @for (int i = 0; i <= 10; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="input-group mt-3 mb-3 justify-content-center">
+                <textarea @bind="_review" placeholder="Write your review here (optional)"></textarea>
+            </div>
+            <div class="d-flex justify-content-center p-3">
+                <button class="btn btn-primary" @onclick="SubmitReview">Submit Review</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private string _searchTerm = string.Empty;
+    private List<Movie>? _searchResults;
+    private int _userId;
+    
+    private string? _messageFavourites;
+    private bool? _isFavouritesSuccessful;
+    
+    private string _selectedMovieTitle = "Search for a movie";
+    private Movie _selectedMovie;
+    private int _rating;
+    private string _review;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var userIdClaim = authState.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userIdClaim != null)
+        {
+            _userId = int.Parse(userIdClaim);
+        }
+    }
+    
+    private async Task UpdateSearchResults(ChangeEventArgs e)
+    {
+        _searchTerm = e.Value!.ToString()!;
+        _searchResults = !string.IsNullOrEmpty(_searchTerm) ? (await MovieService.GetMoviesAsync()).Where(m => m.Title.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase)).ToList() : null;
+        StateHasChanged();
+    }
+    
+    void SelectMovie(string movieTitle)
+    {
+        _searchTerm = movieTitle;
+        _selectedMovie = _searchResults.First(m => m.Title == movieTitle);
+        _searchResults = null;
+    }
+
+    private async Task SubmitReview()
+    {
+        _review = string.IsNullOrWhiteSpace(_review) ? "None" : _review;
+        
+        var newReview = new Review
+        {
+            MovieId = _selectedMovie.IdMovie,
+            UserId = _userId,
+            Rate = _rating,
+            Description = _review
+        };
+        
+        await ReviewService.AddReviewAsync(newReview);
+        NavigationManager.NavigateTo("/reviews");
+    }
+}

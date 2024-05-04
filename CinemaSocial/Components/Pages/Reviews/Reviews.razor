@@ -1,0 +1,86 @@
+@page "/reviews"
+@using CinemaSocial.Models.Entities;
+@using Microsoft.AspNetCore.Authorization
+@inject IReviewService ReviewService
+@inject NavigationManager NavigationManager
+@rendermode InteractiveServer
+@attribute [Authorize(Roles = "Administrator,User")]
+
+<h3 class="display-12">
+    Reviewed movies
+    <a class="bi bi-plus-square pe-auto text-dark" href="/reviews" aria-disabled="true" @onclick="() => NavigationManager.NavigateTo(CreateAReview)"></a>
+</h3>
+
+@if (ReviewedMovies != null)
+{
+    foreach (var review in ReviewedMovies)
+    {
+        var imageUrl = review.Movie?.Images?.FirstOrDefault()?.Url;
+        if (imageUrl != null)
+        {
+            <div>
+                <img src="@imageUrl"/>
+                <h4>@review.Movie.Title</h4>
+                <p>Year: @review.Movie.Year</p>
+                <p>Movie Rating: @review.Movie.Rating</p>
+                <p>Your Rating: @review.Rate</p>
+                <p>@review.Description</p>
+                <button @onclick="() => RemoveReviewedMovie(review)">Remove</button>
+                <button @onclick='() => NavigationManager.NavigateTo($"movie/{review.MovieId}")'>Details</button>
+            </div>
+        }
+    }
+}
+else
+{
+    <p>Loading reviewed movies...</p>
+}
+
+<h3 class="display-12">Rated movies</h3>
+@if (RatedMovies != null)
+{
+    foreach (var review in RatedMovies)
+    {
+        var imageUrl = review.Movie?.Images?.FirstOrDefault()?.Url;
+        if (imageUrl != null)
+        {
+            <div>
+                <img src="@imageUrl"/>
+                <h4>@review.Movie.Title</h4>
+                <p>Your Rating: @review.Rate</p>
+                <button @onclick="() => RemoveRatedMovie(review)">Remove</button>
+                <button @onclick='() => NavigationManager.NavigateTo($"movie/{review.MovieId}")'>Details</button>
+            </div>
+        }
+    }
+}
+else
+{
+    <p>Loading rated movies...</p>
+}
+
+@code {
+    private const string CreateAReview = "/reviews/create";
+    
+    private List<Review>? ReviewedMovies { get; set; }
+    private List<Review>? RatedMovies { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var allReviews = await ReviewService.GetReviewsAsync();
+        ReviewedMovies = allReviews.Where(r => r.Description != "None").ToList();
+        RatedMovies = allReviews.Where(r => r.Description == "None").ToList();
+    }
+
+    private async Task RemoveReviewedMovie(Review review)
+    {
+        await ReviewService.RemoveReviewAsync(review);
+        ReviewedMovies.Remove(review);
+    }
+    
+    private async Task RemoveRatedMovie(Review review)
+    {
+        await ReviewService.RemoveReviewAsync(review);
+        RatedMovies.Remove(review);
+    }
+}

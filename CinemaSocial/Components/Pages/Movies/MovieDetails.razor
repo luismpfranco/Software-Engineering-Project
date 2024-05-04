@@ -1,104 +1,118 @@
 @page "/movie/{id}"
 @using CinemaSocial.Models.Entities
 @using CinemaSocial.Services
-@using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
 @inject IMovieService MovieService
-
-@inject AuthenticationStateProvider authenticationStateProvider
-@inject NavigationManager navigationManager
+@inject WatchlistService WatchlistService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@rendermode InteractiveServer
 
 @{
-    Image image = null;
-    string genreDescription = null;
-    string directorsNames = null;
-    string starsNames = null;
+    Image image = null!;
+    string genreDescription = null!;
+    string directorsNames = null!;
+    string starsNames = null!;
     if (MovieInfos != null)
     {
-        image = MovieInfos.Images.FirstOrDefault(i => i.NumberUrl == "190");
+        image = MovieInfos.Images.FirstOrDefault(i => i!.NumberUrl == "190")!;
         genreDescription = string.Join(", ", MovieInfos.Genre.Select(g => g.Description));
         directorsNames = string.Join(", ", MovieInfos.Director.Select(d => d.Name));
         starsNames = string.Join(", ", MovieInfos.Stars.Select(s => s.Name));
     }
 }
 
-@if (Id is null)
-{
-    <p><em>Loading...</em></p>
-}
-else
-{
-    <PageTitle>@MovieInfos.Title</PageTitle>
-    <div class="hero-bg">
-        <div class="hero-container">
-            <div class="container-xxl d-flex flex-column flex-md-row">
-                <div class="flex-grow-1 d-flex align-items-center justify-content-center">
-                    <div class="title-container text-center">
-                        <h1 class="text-dark">@MovieInfos.Title</h1>
-                        
-                        <img src="@image.Url" class="" alt="Movie Poster"/>
-                        
-                        <div class="movie-links">
-                            <div class="d-flex justify-content-center p-3">
-                                @if (!string.IsNullOrEmpty(@MovieInfos.ImdbId))
-                                {
-                                    <div class="text-center px-2">
-                                        <a href="@MovieInfos.Link" target="_blank" class="btn btn-outline-warning rounded-pill">IMDB</a>
+<AuthorizeView>
+    <Authorized>
+        @if (Id is null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <PageTitle>@MovieInfos?.Title</PageTitle>
+            <div class="hero-bg">
+                <div class="hero-container">
+                    <div class="container-xxl d-flex flex-column flex-md-row">
+                        <div class="flex-grow-1 d-flex align-items-center justify-content-center">
+                            <div class="title-container text-center">
+                                <h1 class="text-dark">@MovieInfos?.Title</h1>
+
+                                <img src="@image.Url" class="" alt="Movie Poster"/>
+
+                                <div class="movie-links">
+                                    <div class="d-flex justify-content-center p-3">
+                                        @if (!string.IsNullOrEmpty(@MovieInfos?.ImdbId))
+                                        {
+                                            <div class="text-center px-2">
+                                                <a href="@MovieInfos.Link" target="_blank" class="btn btn-outline-warning rounded-pill">IMDB</a>
+                                            </div>
+                                        }
                                     </div>
-                                }
+                                </div>
                             </div>
                         </div>
                     </div>
-                    @*<div class="order-last order-md-first d-flex justify-content-center">
-                        <div class="poster-container">
-                            @if (string.IsNullOrEmpty(image.Url))
-                            {
-                                <img class="bg-light" src="https://ih1.redbubble.net/image.1349748792.1068/fposter,small,wall_texture,square_product,600x600.u1.jpg" alt="Movie Poster"/>
-                            }
-                            else
-                            {
-                                <img class="bg-light" src="@image.Url" alt="Movie Poster"/>
-                            }
-                        </div>
-                    </div>*@
+                </div>
+                <div class="container-xxl">
+                    <div class="overview d-flex flex-column">
+                        <p class="text-dark">Rating: @MovieInfos?.Rating</p>
+                        <p class="text-dark">Year: @MovieInfos?.Year</p>
+                        <p class="text-dark">Genre: @genreDescription</p>
+                        <p class="text-dark">Description: @MovieInfos?.Description</p>
+                        <p class="text-dark">Director: @directorsNames</p>
+                        <p class="text-dark">Cast: @starsNames</p>
+                    </div>
+
+                    <div class="m-5 d-flex justify-content-center align-items-center flex-column flex-wrap">
+                        <h2 class="text-dark">Watchlist</h2>
+                        <button class="btn btn-primary m-3" @onclick="() => AddToFavourites(UserId, MovieId)">Add to Favourites</button>
+                        <span class="@(_isFavouritesSuccessful == true ? "text-success" : "text-danger")">@_messageFavourites</span>
+
+                        <button class="btn btn-primary m-3" @onclick="() => AddWatched(MovieId)">Add to Watched</button>
+                        <span class="@(_isWatchedSuccessful == true ? "text-success" : "text-danger")">@_messageWatched</span>
+
+                        <button class="btn btn-primary m-3" @onclick="() => AddToWatch(MovieId)">Add to Watchlist</button>
+                        <span class="@(_isToWatchSuccessful == true ? "text-success" : "text-danger")">@_messageToWatch</span>
+                    </div>
                 </div>
             </div>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <h3 class="m-5">You are not authorized to view this page.</h3>
+            <h5>Please <a class="fw-bolder" href="/login">click here</a> to login.</h5>
+            <h5 class="mt-3">Or you can create an account. <a class="fw-bolder" href="/signup">Click here</a> to sign up.</h5>
         </div>
-        <div class="container-xxl">
-            <div class="overview d-flex flex-column">
-                <p class="text-dark">Rating: @MovieInfos.Rating</p>
-                <p class="text-dark">Year: @MovieInfos.Year</p>
-                <p class="text-dark">Genre: @genreDescription</p>
-                <p class="text-dark">Description: @MovieInfos.Description</p>
-                <p class="text-dark">Director: @directorsNames</p>
-                <p class="text-dark">Cast: @starsNames</p>
+    </NotAuthorized>
+</AuthorizeView>
 
-                <a class="btn btn-primary col-6" href="/movie/@MovieId/watchlists">Add to</a>
-
-                
-            </div>
-        </div>
-    </div>
-}
 
 @code {
     [Parameter]
-    public string Id { get; set; }
+    public string? Id { get; set; }
 
-    public Guid MovieId => Guid.Parse(Id);
+    private Guid MovieId => Guid.Parse(Id!);
 
     private int UserId { get; set; }
-    
-    public Movie MovieInfos { get; set; }
 
+    private Movie? MovieInfos { get; set; }
+
+    private string? _messageFavourites;
+    private bool? _isFavouritesSuccessful;
+    private string? _messageWatched;
+    private bool? _isWatchedSuccessful;
+    private string? _messageToWatch;
+    private bool? _isToWatchSuccessful;
+    
     protected override async Task OnInitializedAsync()
     {
         MovieInfos = await MovieService.GetMovieByIdAsync(MovieId);
-        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
-        if (authState.User.Identity.IsAuthenticated)
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity!.IsAuthenticated)
         {
             var userIdClaim = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            Console.WriteLine($"{userIdClaim} is the user id");
+            authState.User.FindFirstValue(ClaimTypes.Name);
             if (userIdClaim == null)
             {
                 Console.WriteLine("NameIdentifier claim is not present");
@@ -111,6 +125,54 @@ else
         else
         {
             Console.WriteLine("User is not authenticated");
+        }
+    }
+    
+    async void AddToFavourites(int userId, Guid movieId)
+    {
+        var isAlreadyInFavourites = await WatchlistService.IsInFavouritesAsync(userId, movieId);
+        if (isAlreadyInFavourites)
+        {
+            _messageFavourites = "This movie is already in your watchlist Favourites";
+            _isFavouritesSuccessful = false;
+        }
+        else
+        {
+            await WatchlistService.AddToFavouritesAsync(userId, movieId);
+            _messageFavourites = "This movie was successfully added to your watchlist Favourites";
+            _isFavouritesSuccessful = true;
+        }
+    }
+
+    async void AddWatched(Guid movieId)
+    {
+        var isAlreadyInWatched = await WatchlistService.IsInWatchedAsync(UserId, movieId);
+        if (isAlreadyInWatched)
+        {
+            _messageWatched = "This movie is already in your watchlist Watched.";
+            _isWatchedSuccessful = false;
+        }
+        else
+        {
+            await WatchlistService.AddWatchedAsync(UserId, movieId);
+            _messageWatched = "This movie was successfully added to your watchlist Watched";
+            _isWatchedSuccessful = true;
+        }
+    }
+    
+    async void AddToWatch(Guid movieId)
+    {
+        var isAlreadyInToWatch = await WatchlistService.IsInToWatchAsync(UserId, movieId);
+        if (isAlreadyInToWatch)
+        {
+            _messageToWatch = "This movie is already in your watchlist To Watch.";
+            _isToWatchSuccessful = false;
+        }
+        else
+        {
+            await WatchlistService.AddToWatchAsync(UserId, movieId);
+            _messageToWatch = "This movie was successfully added to your watchlist To Watch";
+            _isToWatchSuccessful = true;
         }
     }
 }

@@ -1,0 +1,238 @@
+﻿@page "/watchlists"
+@using System.Security.Claims
+@using CinemaSocial.Models.Entities
+@using CinemaSocial.Models.Watchlists
+@using CinemaSocial.Services
+@using Microsoft.AspNetCore.Authorization
+@using CinemaSocial.Components.Pages.Movies
+@inject WatchlistService WatchlistService
+@inject IMovieService MovieService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
+@rendermode InteractiveServer
+
+<PageTitle>Watchlists</PageTitle>
+
+<div class="row col-12">
+    <AuthorizeView>
+        <NotAuthorized>
+            <span>You are not logged in. Please <a class="fw-bolder" href="/login">click here</a> to login.</span>
+            <span>Or you can create an account. <a class="fw-bolder" href="/signup">Click here</a> to sign up.</span>
+        </NotAuthorized>
+        <Authorized>
+            <div class="container py-3">
+                <h1 class="display-6 text-center fw-bolder">My Watchlists</h1>
+                <h3 class="display-12">
+                    Favourites
+                    <i class="bi bi-plus-square cursor-pointer" @onclick="() => NavigationManager.NavigateTo(AddFavourites)"></i>
+                </h3>
+                <div class="scroll-container">
+                    <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
+                        @if (FavouriteMovies!.Count == 0)
+                        {
+                            <p class="fs-5 mt-3 mb-5"><em>There are no movies added to this watchlist.</em></p>
+                        }
+                        else
+                        {
+                            @foreach (var movie in FavouriteMovies!)
+                            {
+                                var image = movie.Images.FirstOrDefault(i => i.NumberUrl == "190");
+                                <div class="col my-3">
+                                    <div class="card h-100 fade-in" @ref="_posterCardElement">
+                                        @if (image != null)
+                                        {
+                                            <img src="@image.Url" class="card-img-top" alt="Movie Poster"/>
+                                            <div class="card-body p-2 border-top bg-light">
+                                                <div class="overflow-hidden">
+                                                    <h5 class="card-title">@movie.Title</h5>
+                                                </div>
+                                                <p class="card-text">@movie.Year</p>
+                                            </div>
+                                            <div class="card-footer p-1 d-flex flex-column flex-sm-row justify-content-around">
+                                                <button class="btn btn-primary w-100 btn-block d-sm-inline-block me-sm-1 mb-1 mb-sm-0" @onclick="() => RemoveFromFavourites(movie.IdMovie)">Remove</button>
+                                                <a class="btn btn-primary w-100 btn-block d-sm-inline-block ms-sm-1" href="/movie/@movie.IdMovie">Details</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <img src="https://ih1.redbubble.net/image.1349748792.1068/fposter,small,wall_texture,square_product,600x600.u1.jpg" class="card-img-top" alt="Movie Poster"/>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <h3 class="display-12 mt-5">
+                    Watched
+                    <i class="bi bi-plus-square cursor-pointer" @onclick="() => NavigationManager.NavigateTo(AddWatched)"></i>
+                </h3>
+                <div class="scroll-container">
+                    <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
+                        @if (WatchedMovies!.Count == 0)
+                        {
+                            <p class="fs-5 mt-3 mb-5"><em>There are no movies added to this watchlist.</em></p>
+                        }
+                        else
+                        {
+                            @foreach (var movie in WatchedMovies!)
+                            {
+                                var image = movie.Images.FirstOrDefault(i => i.NumberUrl == "190");
+                                <div class="col my-3">
+                                    <div class="card h-100 fade-in" @ref="_posterCardElement">
+                                        @if (image != null)
+                                        {
+                                            <img src="@image.Url" class="card-img-top" alt="Movie Poster"/>
+                                            <div class="card-body p-2 border-top bg-light">
+                                                <div class="overflow-hidden">
+                                                    <h5 class="card-title">@movie.Title</h5>
+                                                </div>
+                                                <p class="card-text">@movie.Year</p>
+                                            </div>
+                                            <div class="card-footer p-1 d-flex flex-column flex-sm-row justify-content-around">
+                                                <button class="btn btn-primary w-100 btn-block d-sm-inline-block me-sm-1 mb-1 mb-sm-0" @onclick="() => RemoveFromWatched(movie.IdMovie)">Remove</button>
+                                                <a class="btn btn-primary w-100 btn-block d-sm-inline-block ms-sm-1" href="/movie/@movie.IdMovie">Details</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <img src="https://ih1.redbubble.net/image.1349748792.1068/fposter,small,wall_texture,square_product,600x600.u1.jpg" class="card-img-top" alt="Movie Poster"/>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <h3 class="display-12 mt-5">
+                    To Watch
+                    <i class="bi bi-plus-square cursor-pointer" @onclick="() => NavigationManager.NavigateTo(AddToWatch)"></i>
+                </h3>
+                <div class="scroll-container">
+                    <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
+                        @if (ToWatchMovies!.Count == 0)
+                        {
+                            <p class="fs-5 mt-3 mb-5"><em>There are no movies added to this watchlist.</em></p>
+                        }
+                        else
+                        {
+                            @foreach (var movie in ToWatchMovies!)
+                            {
+                                var image = movie.Images.FirstOrDefault(i => i.NumberUrl == "190");
+                                <div class="col my-3">
+                                    <div class="card h-100 fade-in" @ref="_posterCardElement">
+                                        @if (image != null)
+                                        {
+                                            <img src="@image.Url" class="card-img-top" alt="Movie Poster"/>
+                                            <div class="card-body p-2 border-top bg-light">
+                                                <div class="overflow-hidden">
+                                                    <h5 class="card-title">@movie.Title</h5>
+                                                </div>
+                                                <p class="card-text">@movie.Year</p>
+                                            </div>
+                                            <div class="card-footer p-1 d-flex flex-column flex-sm-row justify-content-around">
+                                                <button class="btn btn-primary w-100 btn-block d-sm-inline-block me-sm-1 mb-1 mb-sm-0" @onclick="() => RemoveFromToWatch(movie.IdMovie)">Remove</button>
+                                                <a class="btn btn-primary w-100 btn-block d-sm-inline-block ms-sm-1" href="/movie/@movie.IdMovie">Details</a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <img src="https://ih1.redbubble.net/image.1349748792.1068/fposter,small,wall_texture,square_product,600x600.u1.jpg" class="card-img-top" alt="Movie Poster"/>
+                                        }
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+</div>
+
+@code 
+{
+    private ElementReference _posterCardElement;
+    
+    private int UserId { get; set; }
+
+    private List<WatchlistFavourites>? WatchlistFavourites { get; set; }
+    private List<WatchlistWatched>? WatchlistWatched { get; set; }
+    private List<WatchlistToWatch>? WatchlistToWatch { get; set; }
+    
+    private List<Movie>? FavouriteMovies { get; set; }
+    private List<Movie>? WatchedMovies { get; set; }
+    private List<Movie>? ToWatchMovies { get; set; }
+
+    private const string AddFavourites = "/addtofavourites";
+    private const string AddWatched = "/addtowatched";
+    private const string AddToWatch = "/addtowatch";
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity!.IsAuthenticated)
+        {
+            var userIdClaim = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+            {
+                Console.WriteLine("NameIdentifier claim is not present");
+            }
+            else
+            {
+                UserId = int.Parse(userIdClaim);
+                WatchlistFavourites = await WatchlistService.GetWatchlistFavouritesAsync(UserId);
+                WatchlistWatched = await WatchlistService.GetWatchlistWatchedAsync(UserId);
+                WatchlistToWatch = await WatchlistService.GetWatchlistToWatchAsync(UserId);
+                
+                FavouriteMovies = new List<Movie>();
+                foreach (var item in WatchlistFavourites!)
+                {
+                    var movie = await MovieService.GetMovieByIdAsync(item.MovieId);
+                    FavouriteMovies.Add(movie!);
+                }
+
+                WatchedMovies = new List<Movie>();
+                foreach (var item in WatchlistWatched!)
+                {
+                    var movie = await MovieService.GetMovieByIdAsync(item.MovieId);
+                    WatchedMovies.Add(movie!);
+                }
+
+                ToWatchMovies = new List<Movie>();
+                foreach (var item in WatchlistToWatch!)
+                {
+                    var movie = await MovieService.GetMovieByIdAsync(item.MovieId);
+                    ToWatchMovies.Add(movie!);
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine("User is not authenticated");
+        }
+    }
+
+    async void RemoveFromFavourites(Guid movieId)
+    {
+       await WatchlistService.RemoveFromFavouritesAsync(UserId, movieId);
+       FavouriteMovies = FavouriteMovies!.Where(m => m.IdMovie != movieId).ToList();
+       StateHasChanged();
+    }
+    
+    async void RemoveFromWatched(Guid movieId)
+    {
+        await WatchlistService.RemoveFromWatchedAsync(UserId, movieId);
+        WatchedMovies = WatchedMovies!.Where(m => m.IdMovie != movieId).ToList();
+        StateHasChanged();
+    }
+
+    async void RemoveFromToWatch(Guid movieId)
+    {
+        await WatchlistService.RemoveFromWatchAsync(UserId, movieId);
+        ToWatchMovies = ToWatchMovies!.Where(m => m.IdMovie != movieId).ToList();
+        StateHasChanged();
+    }
+}

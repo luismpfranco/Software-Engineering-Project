@@ -36,7 +36,7 @@ public class DatabaseAPI : ControllerBase
 
                     foreach (var item in filmesDTO)
                     {
-                        Movie filmeBD = new Movie
+                        Movie? filmeBD = new Movie
                         {
                             IdMovie = Guid.NewGuid(),
                             Title = item.Title,
