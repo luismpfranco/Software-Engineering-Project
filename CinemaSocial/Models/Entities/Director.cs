@@ -7,9 +7,9 @@ namespace CinemaSocial.Models.Entities
     public class Director
     {
         [Key]
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public Guid IdMovie { get; set; }
-        public Movie Movie { get; set; }
+        public Guid Id { get; init; }
+        public string Name { get; init; }
+        public Guid IdMovie { get; init; }
+        public Movie? Movie { get; init; }
     }
 }

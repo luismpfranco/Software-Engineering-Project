@@ -7,10 +7,10 @@ namespace CinemaSocial.Models.Entities
     public class Genre
     {
         [Key]
-        public Guid Id { get; set; }
-        public string Description { get; set; }
+        public Guid Id { get; init; }
+        public string Description { get; init; }
 
-        public Guid IdMovie { get; set; }
-        public Movie Movie { get; set; }
+        public Guid IdMovie { get; init; }
+        public Movie? Movie { get; init; }
     }
 }

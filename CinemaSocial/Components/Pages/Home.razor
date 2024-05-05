@@ -2,82 +2,75 @@
 @using CinemaSocial.Models.Entities
 @using CinemaSocial.Services
 @using CinemaSocial.Components.Pages.Movies
+@using Microsoft.AspNetCore.Authorization
 @inject IMovieService MovieService
-@inject NavigationManager NavigationManager
 @rendermode InteractiveServer
+@attribute [Authorize(Roles = "Administrator,User")]
 
 <PageTitle>Home</PageTitle>
 
 <div class="row col-12">
-    <AuthorizeView>
-        <NotAuthorized>
-            <span>You are not logged in. Please <a class="fw-bolder" href="/login">click here</a> to login.</span>
-            <span>Or you can create an account. <a class="fw-bolder" href="/signup">Click here</a> to sign up.</span>
-        </NotAuthorized>
-        <Authorized>
-            <div class="container py-3">
-                <h1 class="display-6 text-center fw-bolder">Movies</h1>
-                <div class="input-group mt-3 mb-3">
-                    <input type="text" class="form-control" placeholder="Search for a movie" @bind="_searchTerm" @oninput="UpdateSearchResults">
-                </div>
-                @if (_searchResults != null && _searchResults.Any())
+    <div class="container py-3" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+        <h1 class="display-6 text-center fw-bolder">Movies</h1>
+        <div class="input-group mt-3 mb-3">
+            <input type="text" class="form-control" placeholder="Search for a movie" @bind="_searchTerm" @oninput="UpdateSearchResults">
+        </div>
+        @if (_searchResults != null && _searchResults.Any())
+        {
+            <div class="dropdown-menu show" style="max-height: 250px; overflow-y: auto;">
+                @foreach (var movie in _searchResults)
                 {
-                    <div class="dropdown-menu show">
-                        @foreach (var movie in _searchResults)
-                        {
-                            <a class="dropdown-item" href="/movie/@movie.IdMovie">@movie.Title</a>
-                        }
-                    </div>
+                    <a class="dropdown-item" href="/movie/@movie.IdMovie">@movie.Title</a>
                 }
-                <h3 class="display-12 text-danger">Top 10</h3>
-                <div class="scroll-container">
-                    <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
-                        @if (MoviesTop10?.Count > 0)
-                        {
-                            @foreach (var movie in MoviesTop10)
-                            {
-                                <div class="col my-3">
-                                    <TopMovies Movie="movie"/>
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            for (var i = 0; i < 10; i++)
-                            {
-                                <div class="col">
-                                    <MovieCard/>
-                                </div>
-                            }
-                        }
-                    </div>
-                </div>
-                <h3 class="pt-5 display-12 text-danger">Most Popular Movies</h3>
-                <div class="d-flex flex-md-row justify-content-between my-3">
-                    <div class="w-100 h-auto mh-50 row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
-                        @if (PopularMovies?.Count > 0)
-                        {
-                            @foreach (var movie in PopularMovies)
-                            {
-                                <div class="col my-3">
-                                    <MovieCard Movie="movie"/>
-                                </div>
-                            }
-                        }
-                        else
-                        {
-                            for (var i = 0; i < 10; i++)
-                            {
-                                <div class="col">
-                                    <MovieCard/>
-                                </div>
-                            }
-                        }
-                    </div>
-                </div>
             </div>
-        </Authorized>
-    </AuthorizeView>
+        }
+        <h3 class="display-12 text-danger">Top 10</h3>
+        <div class="scroll-container">
+            <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
+                @if (MoviesTop10?.Count > 0)
+                {
+                    @foreach (var movie in MoviesTop10)
+                    {
+                        <div class="col my-3">
+                            <TopMovies Movie="movie"/>
+                        </div>
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i < 10; i++)
+                    {
+                        <div class="col">
+                            <MovieCard/>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+        <h3 class="pt-5 display-12 text-danger">Most Popular Movies</h3>
+        <div class="d-flex flex-md-row justify-content-between my-3">
+            <div class="w-100 h-auto mh-50 row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
+                @if (PopularMovies?.Count > 0)
+                {
+                    @foreach (var movie in PopularMovies)
+                    {
+                        <div class="col my-3">
+                            <MovieCard Movie="movie"/>
+                        </div>
+                    }
+                }
+                else
+                {
+                    for (var i = 0; i < 10; i++)
+                    {
+                        <div class="col">
+                            <MovieCard/>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
 </div>
 
 @code {
@@ -88,27 +81,20 @@
     
     protected override async Task OnInitializedAsync()
     {
-        MoviesTop10 = (await MovieService.GetMoviesAsync()).OrderBy(m => m.Rank).Take(10).ToList();
+        MoviesTop10 = (await MovieService.GetMoviesAsync()).OrderBy(m => m!.Rank).Take(10).ToList()!;
         await LoadPage();
     }
 
     private async Task LoadPage()
     {
-        PopularMovies = (await MovieService.GetMoviesAsync()).OrderBy(m => m.Rank).Skip(10).ToList();
+        PopularMovies = (await MovieService.GetMoviesAsync()).OrderBy(m => m!.Rank).Skip(10).ToList()!;
     }
     
 
     private async Task UpdateSearchResults(ChangeEventArgs e)
     {
-        _searchTerm = e.Value.ToString();
-        if (!string.IsNullOrEmpty(_searchTerm))
-        {
-            _searchResults = (await MovieService.GetMoviesAsync()).Where(m => m.Title.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
-        }
-        else
-        {
-            _searchResults = null;
-        }
+        _searchTerm = e.Value!.ToString()!;
+        _searchResults = (!string.IsNullOrEmpty(_searchTerm) ? (await MovieService.GetMoviesAsync()).Where(m => m.Title.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase)).ToList() : null)!;
         StateHasChanged();
     }
 }

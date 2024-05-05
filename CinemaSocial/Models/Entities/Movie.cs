@@ -7,20 +7,20 @@ namespace CinemaSocial.Models.Entities
     public class Movie
     {
         [Key]
-        public Guid IdMovie { get; set; }
-        //public string Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public string Link { get; set; }
-        public ICollection<Director> Director { get; set; }
-        public ICollection<Writer> Writers { get; set; }
-        public ICollection<Star> Stars { get; set; }
-        public ICollection<Genre> Genre { get; set; }
-        public ICollection<Image> Images { get; set; }
-        public string ImdbId { get; set; }
-        public int Rank { get; set; }
-        public string Rating { get; set; }
-        public string Year { get; set; }
+        public Guid IdMovie { get; init; }
+        public string? Title { get; init; }
+        public string Description { get; init; }
+        public string Link { get; init; }
+        public ICollection<Director> Director { get; init; }
+        public ICollection<Writer> Writers { get; init; }
+        public ICollection<Star> Stars { get; init; }
+        public ICollection<Genre> Genre { get; init; }
+        public ICollection<Image> Images { get; init; }
+        public string ImdbId { get; init; }
+        public int Rank { get; init; }
+        public string Rating { get; init; }
+        public string Year { get; init; }
+        public ICollection<Review> Reviews { get; init; }
         
         public Movie()
         {

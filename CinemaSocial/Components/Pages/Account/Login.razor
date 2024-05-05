@@ -1,13 +1,12 @@
 @page "/login"
-
 @using CinemaSocial.Data
 @using CinemaSocial.Models.ViewModels
 @using System.Security.Claims
 @using System.Security.Cryptography
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.AspNetCore.Authentication.Cookies
-@inject AppDbContext appDbContext
-@inject NavigationManager navigationManager
+@inject AppDbContext AppDbContext
+@inject NavigationManager NavigationManager
 
 <div class="row">
     <div class="col-lg-4 offset-lg-4 pt-4 pb-4 border">
@@ -29,7 +28,7 @@
                 <ValidationMessage For="() => Model.Password"/>
             </div>
             <div class="mb-3 text-center">
-                <span class="text-danger">@errorMessage</span>
+                <span class="text-danger">@_errorMessage</span>
             </div>
             <div class="mb-3 d-grid gap-2">
                 <button type="submit" class="btn btn-primary">Login</button>
@@ -45,48 +44,48 @@
     [SupplyParameterFromForm] 
     public LoginViewModel Model { get; set; } = new();
 
-    private string? errorMessage;
+    private string? _errorMessage;
     
+    [Obsolete("Obsolete")]
     private async Task Authenticate()
     {
-        var userAccount = appDbContext.UserAccounts.Where(x => x.UserName == Model.UserName).FirstOrDefault();
+        var userAccount = AppDbContext.UserAccounts.FirstOrDefault(x => x.UserName == Model.UserName);
 
         if (userAccount is null)
         {
-            errorMessage = "Invalid UserName or Password";
+            _errorMessage = "Invalid UserName or Password";
             return;
         }
 
-        var (hashedPassword, _) = HashPassword(Model.Password, Convert.FromBase64String(userAccount.Salt));
+        var hashedPassword = HashPassword(Model.Password!, Convert.FromBase64String(userAccount.Salt!));
 
         if (userAccount.Password != hashedPassword)
         {
-            errorMessage = "Invalid UserName or Password";
+            _errorMessage = "Invalid UserName or Password";
             return;
         }
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, userAccount.UserName),
-            new Claim(ClaimTypes.Role, userAccount.Role),
-            new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()) // Convert the Id to a string
+            new Claim(ClaimTypes.Name, userAccount.UserName!),
+            new Claim(ClaimTypes.Role, userAccount.Role!),
+            new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString())
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
-        await HttpContext.SignInAsync(principal);
-        navigationManager.NavigateTo("/profile");
+        await HttpContext!.SignInAsync(principal);
+        NavigationManager.NavigateTo("/profile");
     }
-    
-    public static (string hashedPassword, string salt) HashPassword(string password, byte[] saltBytes)
-    {
-        var salt = Convert.ToBase64String(saltBytes);
 
+    [Obsolete("Obsolete")]
+    private static string HashPassword(string password, byte[] saltBytes)
+    {
         var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, 10000);
         var hashBytes = pbkdf2.GetBytes(20);
         var hashedPassword = Convert.ToBase64String(hashBytes);
 
-        return (hashedPassword, salt);
+        return hashedPassword;
     }
 }
 

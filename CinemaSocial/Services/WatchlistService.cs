@@ -1,7 +1,6 @@
 ﻿using CinemaSocial.Data;
-using CinemaSocial.Models.Entities;
+using CinemaSocial.Models.Entities.Watchlists;
 using Microsoft.EntityFrameworkCore;
-using CinemaSocial.Models.Watchlists;
 
 namespace CinemaSocial.Services;
 
@@ -26,20 +25,6 @@ public class WatchlistService(AppDbContext context)
         return await context.WatchlistToWatch
             .Where(w => w.UserId == userId)
             .ToListAsync();
-    }
-    
-    public async Task<List<Movie?>> GetMoviesNotInFavouritesAsync(int userId)
-    {
-        var favouriteMovieIds = context.WatchlistFavourites
-            .Where(wf => wf.UserId == userId)
-            .Select(wf => wf.MovieId)
-            .ToList();
-
-        var moviesNotInFavourites = await context.Movies
-            .Where(m => !favouriteMovieIds.Contains(m!.IdMovie))
-            .ToListAsync();
-
-        return moviesNotInFavourites;
     }
     
     public async Task AddToFavouritesAsync(int userId, Guid movieId)

@@ -4,34 +4,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CinemaSocial.Services;
 
-public class MovieService : IMovieService
+public class MovieService(AppDbContext context) : IMovieService
 {
-    private readonly AppDbContext _context;
-
-    public MovieService(AppDbContext context)
-    {
-        _context = context;
-    }
-    
-    public async Task<List<Movie>> GetMoviesAsync()
+    public async Task<List<Movie?>> GetMoviesAsync()
     {    
-        return await _context.Movies
+        return (await context.Movies
             .Include(m => m.Director)
             .Include(m => m.Writers)
             .Include(m => m.Stars)
             .Include(m => m.Genre)
             .Include(m => m.Images)
-            .ToListAsync();
+            .ToListAsync())!;
     }
     
     public async Task<Movie?> GetMovieByIdAsync(Guid id)
     {
-        return await _context.Movies
+        return await context.Movies
             .Include(m => m.Director)
             .Include(m => m.Writers)
             .Include(m => m.Stars)
             .Include(m => m.Genre)
             .Include(m => m.Images)
             .FirstOrDefaultAsync(m => m.IdMovie == id);
+    }
+    
+    public async Task<List<Movie>> SearchMoviesAsync(string searchTerm)
+    {
+        return await context.Movies
+            .Where(m => m.Title.Contains(searchTerm))
+            .ToListAsync();
     }
 }

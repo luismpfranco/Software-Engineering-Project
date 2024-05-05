@@ -1,0 +1,138 @@
+@page "/otherReviews"
+@using System.Security.Claims
+@using CinemaSocial.Models.Entities
+@using CinemaSocial.Services
+@using Microsoft.AspNetCore.Authorization
+@inject ReviewService ReviewService
+@inject MovieService MovieService
+@inject ILikeService LikeService
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@rendermode InteractiveServer
+@attribute [Authorize(Roles = "Administrator,User")]
+
+<div class="container py-3" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+    <h3 class="display-12 my-3">
+        Reviewed Movies
+        <a class="bi bi-plus-square pe-auto text-dark" href="/reviews/create" aria-disabled="true" @onclick='() => NavigationManager.NavigateTo("/reviews/create")'></a>
+    </h3>
+
+    @if (_reviews == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <div class="mb-5">
+            @foreach (var review in _reviews)
+            {
+                var movie = MovieService.GetMovieByIdAsync(review.MovieId);
+                var imageUrl = movie.Result!.Images.FirstOrDefault(i => i.NumberUrl == "190");
+                var user = ReviewService.GetUserByIdAsync(review.UserId);
+                var likes = LikeService.GetLikesAsync(review.Id).Result;
+                var dislikes = LikeService.GetDislikesAsync(review.Id).Result;
+                if(imageUrl != null)
+                {
+                    <div class="movie-box">
+                        <img src="@imageUrl.Url" alt="Movie Poster"/>
+                        <div class="movie-details">
+                            <h4>@review.Movie.Title</h4>
+                            <p>Year: @review.Movie.Year</p>
+                            <p>Movie Rating: @review.Movie.Rating</p>
+                            <p>Genre:
+                                @foreach(var genre in review.Movie.Genre)
+                                {
+                                    if(genre != review.Movie.Genre.Last())
+                                    {
+                                        <span>@genre.Description, </span>
+                                    }
+                                    else
+                                    {
+                                        <span>@genre.Description</span>
+                                    }
+                                }
+                            </p>
+                            <p>Reviewed by: @user.Result!.UserName</p>
+                            <p>Rating: @review.Rate</p>
+                            <p>Review: @review.Description</p>
+                            <div>
+                                <a class="btn btn-primary" href="/movie/@movie.Result.IdMovie" @onclick='() => NavigationManager.NavigateTo($"/movie/{movie.Result.IdMovie}")'>Details</a>
+                                <button class="btn btn-link text-success text-decoration-none" @onclick='() => UpdateLikeState(review.Id, UserId)'>
+                                    <i class="@(_likeStates.ContainsKey(review.Id) && _likeStates[review.Id] ? "bi bi-hand-thumbs-up-fill" : "bi bi-hand-thumbs-up")"></i> (@likes)
+                                </button>
+                                <button class="btn btn-link text-danger text-decoration-none" @onclick='() => UpdateDislikeState(review.Id, UserId)'>
+                                    <i class="@(_dislikeStates.ContainsKey(review.Id) && _dislikeStates[review.Id] ? "bi bi-hand-thumbs-down-fill" : "bi bi-hand-thumbs-down")"></i> (@dislikes)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    }
+</div>
+
+
+@code {
+    private List<Review>? _allReviews;
+    private List<Review>? _reviews;
+    private int UserId { get; set; }
+
+    private readonly Dictionary<Guid, bool> _likeStates = new();
+    private readonly Dictionary<Guid, bool> _dislikeStates = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity!.IsAuthenticated)
+        {
+            var userIdClaim = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (userIdClaim != null)
+            {
+                UserId = int.Parse(userIdClaim);
+                _allReviews = await ReviewService.GetReviewsAsync();
+                _reviews = _allReviews.Where(r => r.Description != "None").ToList();
+
+                foreach (var review in _reviews)
+                {
+                    var existingLike = await LikeService.GetLike(review.Id, UserId);
+                    _likeStates[review.Id] = existingLike is { IsLike: true };
+                    _dislikeStates[review.Id] = existingLike is { IsLike: false };
+                }
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/login");
+            }
+        }
+        else
+        {
+            NavigationManager.NavigateTo("/login");
+        }
+    }
+    
+    async Task UpdateLikeState(Guid reviewId, int userId)
+    {
+        await LikeService.AddLike(reviewId, userId);
+        var existingLike = await LikeService.GetLike(reviewId, userId);
+        _likeStates[reviewId] = existingLike is { IsLike: true };
+        if (existingLike is { IsLike: true })
+        {
+            _dislikeStates[reviewId] = false;
+        }
+        StateHasChanged();
+    }
+
+    async Task UpdateDislikeState(Guid reviewId, int userId)
+    {
+        await LikeService.AddDislike(reviewId, userId);
+        var existingLike = await LikeService.GetLike(reviewId, userId);
+        _dislikeStates[reviewId] = existingLike is { IsLike: false };
+        if (existingLike is { IsLike: false })
+        {
+            _likeStates[reviewId] = false;
+        }
+        StateHasChanged();
+    }
+
+}

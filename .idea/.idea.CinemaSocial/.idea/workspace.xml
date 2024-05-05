@@ -10,44 +10,56 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2a55d7f-83d7-4bfe-84f9-14331021e02e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/CreateAReview.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/Reviews.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Settings.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToFavourites.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatch.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatched.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/ChooseWatchlists.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/Watchlist.razor" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/Watchlist.razor.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Review.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Services/IReviewService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CinemaSocial/Services/ReviewService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/MovieDetails.razor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/OtherReviews.razor" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/OtherReviews.razor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/Reviews.razor.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Like.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Services/ILikeService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Services/LikeService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/dataSources/140a7ad8-c8c8-4727-975c-dc974e977657.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/dataSources/140a7ad8-c8c8-4727-975c-dc974e977657.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/API/ProfileAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/API/ProfileAPI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/CinemaSocial.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/CinemaSocial.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/App.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/App.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Layout/MainLayout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Layout/MainLayout.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Layout/MainLayout.razor.css" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Layout/MainLayout.razor.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Layout/NavMenu.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Layout/NavMenu.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/Login.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/Login.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/Logout.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/Logout.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/SignUp.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/SignUp.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/ChooseWatchlists.razor" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Home.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Home.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Home.razor.css" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Home.razor.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/MovieCard.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/MovieCard.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/MovieDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/MovieDetails.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/TopMovies.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/TopMovies.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Profile.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Profile.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlist.razor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlist.razor.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Weather.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/CreateAReview.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/CreateAReview.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/Reviews.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/Reviews.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Settings.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Settings.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToFavourites.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToFavourites.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatch.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatch.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatched.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatched.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/ChooseWatchlists.razor" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/Watchlist.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/Watchlist.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Data/AppDbContext.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/DTO/MoviesDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/DTO/MoviesDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Director.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Director.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Genre.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Genre.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Image.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Image.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Movie.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Movie.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Review.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Review.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Star.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Star.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Entities/UserAccount.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/UserAccount.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Writer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Writer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Profile/Profile.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/ViewModels/LoginViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/ViewModels/LoginViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Watchlists/WatchlistFavourites.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Watchlists/WatchlistFavourites.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Watchlists/WatchlistToWatch.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Watchlists/WatchlistToWatch.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Models/Watchlists/WatchlistWatched.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Models/Entities/Watchlists/WatchlistWatched.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/IMovieService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Services/IMovieService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/IReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Services/IReviewService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/MovieService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Services/MovieService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/ReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Services/ReviewService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/Watchlist.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/WatchlistService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Services/WatchlistService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/cinema.db" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/cinema.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/wwwroot/js/vanilla-tilt.min.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +145,9 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df33c7fd7db04a829574707592655c01d82000/b7/65b29feb/Monitor.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -244,6 +259,22 @@
       <workItem from="1714860922342" duration="12000" />
       <workItem from="1714860942839" duration="175000" />
       <workItem from="1714861129915" duration="5044000" />
+      <workItem from="1714866303265" duration="141000" />
+      <workItem from="1714902870148" duration="1317000" />
+      <workItem from="1714904229890" duration="113000" />
+      <workItem from="1714904403390" duration="596000" />
+      <workItem from="1714905035376" duration="1424000" />
+      <workItem from="1714906473333" duration="191000" />
+      <workItem from="1714906666786" duration="3314000" />
+      <workItem from="1714910024812" duration="88000" />
+      <workItem from="1714910133532" duration="925000" />
+      <workItem from="1714911177702" duration="2942000" />
+      <workItem from="1714914167026" duration="2181000" />
+      <workItem from="1714916470519" duration="319000" />
+      <workItem from="1714916816431" duration="2700000" />
+      <workItem from="1714919549208" duration="660000" />
+      <workItem from="1714920229526" duration="49000" />
+      <workItem from="1714920294419" duration="1706000" />
     </task>
     <task id="LOCAL-00001" summary="add main pages">
       <option name="closed" value="true" />
@@ -253,7 +284,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714594375798</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="watchlists, profile and create review done.">
+      <option name="closed" value="true" />
+      <created>1714866415940</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714866415940</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -265,7 +304,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="add main pages" />
     <MESSAGE value="add js" />
-    <option name="LAST_COMMIT_MESSAGE" value="add js" />
+    <MESSAGE value="watchlists, profile and create review done." />
+    <option name="LAST_COMMIT_MESSAGE" value="watchlists, profile and create review done." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

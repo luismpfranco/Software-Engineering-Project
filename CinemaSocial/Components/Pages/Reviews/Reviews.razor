@@ -1,86 +1,139 @@
 @page "/reviews"
+@using System.Security.Claims
 @using CinemaSocial.Models.Entities;
+@using CinemaSocial.Services
 @using Microsoft.AspNetCore.Authorization
 @inject IReviewService ReviewService
 @inject NavigationManager NavigationManager
+@inject MovieService MovieService
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
 @attribute [Authorize(Roles = "Administrator,User")]
 
-<h3 class="display-12">
-    Reviewed movies
-    <a class="bi bi-plus-square pe-auto text-dark" href="/reviews" aria-disabled="true" @onclick="() => NavigationManager.NavigateTo(CreateAReview)"></a>
-</h3>
+<div class="container py-3" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+    <h3 class="display-12 my-3">
+        Reviewed Movies
+        <a class="bi bi-plus-square pe-auto text-dark" href="/reviews" aria-disabled="true" @onclick='() => NavigationManager.NavigateTo("/reviews/create")'></a>
+    </h3>
 
-@if (ReviewedMovies != null)
-{
-    foreach (var review in ReviewedMovies)
+    @if (ReviewedMovies != null)
     {
-        var imageUrl = review.Movie?.Images?.FirstOrDefault()?.Url;
-        if (imageUrl != null)
+        foreach (var review in ReviewedMovies)
         {
-            <div>
-                <img src="@imageUrl"/>
-                <h4>@review.Movie.Title</h4>
-                <p>Year: @review.Movie.Year</p>
-                <p>Movie Rating: @review.Movie.Rating</p>
-                <p>Your Rating: @review.Rate</p>
-                <p>@review.Description</p>
-                <button @onclick="() => RemoveReviewedMovie(review)">Remove</button>
-                <button @onclick='() => NavigationManager.NavigateTo($"movie/{review.MovieId}")'>Details</button>
-            </div>
+            var movie = MovieService.GetMovieByIdAsync(review.MovieId);
+            var imageUrl = movie.Result!.Images.FirstOrDefault(i => i.NumberUrl == "190");
+            if (imageUrl != null)
+            {
+                <div class="movie-box">
+                    <img src="@imageUrl.Url" alt="Movie Poster"/>
+                    <div class="movie-details">
+                        <h4>@review.Movie.Title</h4>
+                        <p>Year: @review.Movie.Year</p>
+                        <p>Movie Rating: @review.Movie.Rating</p>
+                        <p>Genre: 
+                            @foreach(var genre in review.Movie.Genre)
+                            {
+                                if(genre != review.Movie.Genre.Last())
+                                {
+                                    <span>@genre.Description, </span>
+                                }
+                                else
+                                {
+                                    <span>@genre.Description</span>
+                                }
+                            }
+                        </p>
+                        <p>Your Rating: @review.Rate</p>
+                        <p>Your Review: @review.Description</p>
+                        <div>
+                            <button class="btn btn-primary" @onclick="() => RemoveReviewedMovie(review)">Remove</button>
+                            <button class="btn btn-primary" @onclick='() => NavigationManager.NavigateTo($"movie/{review.MovieId}")'>Details</button>
+                        </div>
+                    </div>
+                </div>
+            }
         }
     }
-}
-else
-{
-    <p>Loading reviewed movies...</p>
-}
-
-<h3 class="display-12">Rated movies</h3>
-@if (RatedMovies != null)
-{
-    foreach (var review in RatedMovies)
+    else
     {
-        var imageUrl = review.Movie?.Images?.FirstOrDefault()?.Url;
-        if (imageUrl != null)
-        {
-            <div>
-                <img src="@imageUrl"/>
-                <h4>@review.Movie.Title</h4>
-                <p>Your Rating: @review.Rate</p>
-                <button @onclick="() => RemoveRatedMovie(review)">Remove</button>
-                <button @onclick='() => NavigationManager.NavigateTo($"movie/{review.MovieId}")'>Details</button>
-            </div>
-        }
+        <p>Loading reviewed movies...</p>
     }
-}
-else
-{
-    <p>Loading rated movies...</p>
-}
+
+    <h3 class="display-12 mt-5 mb-3">
+        Rated movies
+        <a class="bi bi-plus-square pe-auto text-dark" href="/reviews" aria-disabled="true" @onclick='() => NavigationManager.NavigateTo("/reviews/create")'></a>
+    </h3>
+    @if (RatedMovies != null)
+    {
+        <div class="scroll-container mb-5">
+            <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
+                @foreach (var review in RatedMovies)
+                {
+                    var movie = MovieService.GetMovieByIdAsync(review.MovieId);
+                    var imageUrl = movie.Result!.Images.FirstOrDefault(i => i.NumberUrl == "190");
+                    if (imageUrl != null)
+                    {
+                        <div class="col my-3">
+                            <div class="card h-100 fade-in">
+                                <img src="@imageUrl.Url" class="card-img-top" alt="Movie Poster"/>
+                                <div class="card-body p-2 border-top bg-light">
+                                    <div class="overflow-hidden">
+                                        <h4 class="card-title">@review.Movie.Title</h4>
+                                    </div>
+                                    <p class="card-text">Year: @review.Movie.Year</p>
+                                    <p class="card-text">Your Rating: @review.Rate</p>
+                                </div>
+                                <div class="card-footer p-1 d-flex flex-column flex-sm-row justify-content-around">
+                                    <button class="btn btn-primary w-100 btn-block d-sm-inline-block me-sm-1 mb-1 mb-sm-0" @onclick="() => RemoveRatedMovie(review)">Remove</button>
+                                    <button class="btn btn-primary w-100 btn-block d-sm-inline-block ms-sm-1" @onclick='() => NavigationManager.NavigateTo($"movie/{review.MovieId}")'>Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Loading rated movies...</p>
+    }
+</div>
 
 @code {
-    private const string CreateAReview = "/reviews/create";
-    
     private List<Review>? ReviewedMovies { get; set; }
     private List<Review>? RatedMovies { get; set; }
+    private int UserId { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        var allReviews = await ReviewService.GetReviewsAsync();
-        ReviewedMovies = allReviews.Where(r => r.Description != "None").ToList();
-        RatedMovies = allReviews.Where(r => r.Description == "None").ToList();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if (authState.User.Identity!.IsAuthenticated)
+        {
+            var userIdClaim = authState.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if(userIdClaim != null)
+            {
+                UserId = int.Parse(userIdClaim);
+                var allReviews = await ReviewService.GetReviewsAsync(UserId);
+                ReviewedMovies = allReviews.Where(r => r.Description != "None").ToList();
+                RatedMovies = allReviews.Where(r => r.Description == "None").ToList();
+            }
+            else
+            {
+                NavigationManager.NavigateTo("/login");
+            }
+        }
     }
 
     private async Task RemoveReviewedMovie(Review review)
     {
         await ReviewService.RemoveReviewAsync(review);
-        ReviewedMovies.Remove(review);
+        ReviewedMovies!.Remove(review);
     }
     
     private async Task RemoveRatedMovie(Review review)
     {
         await ReviewService.RemoveReviewAsync(review);
-        RatedMovies.Remove(review);
+        RatedMovies!.Remove(review);
     }
 }

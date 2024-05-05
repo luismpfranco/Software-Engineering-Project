@@ -1,5 +1,4 @@
 @page "/signup"
-
 @using CinemaSocial.Data
 @using CinemaSocial.Models.ViewModels
 @using CinemaSocial.Models.Entities
@@ -8,8 +7,8 @@
 @using Microsoft.AspNetCore.Authentication
 @using Microsoft.AspNetCore.Authentication.Cookies
 @using Microsoft.EntityFrameworkCore
-@inject AppDbContext appDbContext
-@inject NavigationManager navigationManager
+@inject AppDbContext AppDbContext
+@inject NavigationManager NavigationManager
 
 <div class="row">
     <div class="col-lg-4 offset-lg-4 pt-4 pb-4 border">
@@ -31,7 +30,7 @@
                 <ValidationMessage For="() => Model.UserName"/>
             </div>
             <div class="text-center">
-                <span class="text-danger">@errorMessageUsername</span>
+                <span class="text-danger">@_errorMessageUsername</span>
             </div>
             <div class="mb-3">
                 <label>Email</label>
@@ -39,7 +38,7 @@
                 <ValidationMessage For="() => Model.Email"/>
             </div>
             <div class="text-center">
-                <span class="text-danger">@errorMessageEmail</span>
+                <span class="text-danger">@_errorMessageEmail</span>
             </div>
             <div class="mb-3">
                 <label>Password</label>
@@ -56,7 +55,7 @@
                 <label>I agree with your terms and conditions.</label>
             </div>
             <div class="mb-3 text-center">
-                <span class="text-danger">@errorMessage</span>
+                <span class="text-danger">@_errorMessage</span>
             </div>
             <div class="mb-3 d-grid gap-2">
                 <button type="submit" class="btn btn-primary">Sign up</button>
@@ -72,36 +71,37 @@
     [SupplyParameterFromForm] 
     public SignUpViewModel Model { get; set; } = new();
 
-    private string? errorMessage;
-    private string? errorMessageUsername;
-    private string? errorMessageEmail;
+    private string? _errorMessage;
+    private string? _errorMessageUsername;
+    private string? _errorMessageEmail;
     
+    [Obsolete("Obsolete")]
     private async Task Authenticate()
     {
         if (!Model.HasAgreedToTerms)
         {
-            errorMessage = "You must agree to the terms and conditions to sign up.";
+            _errorMessage = "You must agree to the terms and conditions to sign up.";
             return;
         }
 
-        var usernameExists = await appDbContext.UserAccounts
+        var usernameExists = await AppDbContext.UserAccounts
             .AnyAsync(x => x.UserName == Model.UserName);
 
-        var emailExists = await appDbContext.UserAccounts
+        var emailExists = await AppDbContext.UserAccounts
             .AnyAsync(x => x.Email == Model.Email);
         
         if (usernameExists)
         {
-            errorMessageUsername = "Username already exists.";
+            _errorMessageUsername = "Username already exists.";
             return;
         }
         if (emailExists)
         {
-            errorMessageEmail = "Email already exists.";
+            _errorMessageEmail = "Email already exists.";
             return;
         }
 
-        var (hashedPassword, salt) = HashPassword(Model.Password);
+        var (hashedPassword, salt) = HashPassword(Model.Password!);
 
         var userAccount = new UserAccount
         {
@@ -113,23 +113,23 @@
             Role = "User"
         };
 
-        await appDbContext.UserAccounts.AddAsync(userAccount);
-        await appDbContext.SaveChangesAsync();
+        await AppDbContext.UserAccounts.AddAsync(userAccount);
+        await AppDbContext.SaveChangesAsync();
 
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, userAccount.UserName),
+            new Claim(ClaimTypes.Name, userAccount.UserName!),
             new Claim(ClaimTypes.Role, userAccount.Role)
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
 
-        await HttpContext.SignInAsync(principal);
+        await HttpContext!.SignInAsync(principal);
 
         AgreeWithTerms();
 
-        navigationManager.NavigateTo("/profile");
+        NavigationManager.NavigateTo("/profile");
     }
     
     private void AgreeWithTerms()
@@ -137,7 +137,8 @@
         Model.HasAgreedToTerms = true;
     }
     
-    public static (string hashedPassword, string salt) HashPassword(string password)
+    [Obsolete("Obsolete")]
+    private static (string hashedPassword, string salt) HashPassword(string password)
     {
         var saltBytes = new byte[32];
         using (var provider = new RNGCryptoServiceProvider())

@@ -7,10 +7,10 @@ namespace CinemaSocial.Models.Entities
     public class Image
     {
         [Key]
-        public Guid Id { get; set; }
-        public string Url { get; set; }
-        public string NumberUrl { get; set; }
-        public Guid IdMovie { get; set; }
-        public Movie Movie { get; set; }
+        public Guid Id { get; init; }
+        public string Url { get; init; }
+        public string NumberUrl { get; init; }
+        public Guid IdMovie { get; init; }
+        public Movie? Movie { get; init; }
     }
 }

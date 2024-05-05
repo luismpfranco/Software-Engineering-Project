@@ -4,32 +4,48 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CinemaSocial.Services;
 
-public class ReviewService : IReviewService
+public class ReviewService(AppDbContext context) : IReviewService
 {
-    private readonly AppDbContext _context;
-
-    public ReviewService(AppDbContext context)
+    public async Task<List<Review>> GetReviewsAsync(int userId)
     {
-        _context = context;
+        return await context.Reviews
+            .Include(r => r.Movie)
+            .Include(r => r.User)
+            .Where(r => r.UserId == userId)
+            .ToListAsync();
     }
-
+    
     public async Task<List<Review>> GetReviewsAsync()
     {
-        return await _context.Reviews
+        return await context.Reviews
             .Include(r => r.Movie)
             .Include(r => r.User)
             .ToListAsync();
     }
     
+    public async Task<List<Review>> GetReviewsAsync(Guid movieId)
+    {
+        return await context.Reviews
+            .Include(r => r.Movie)
+            .Include(r => r.User)
+            .Where(r => r.MovieId == movieId)
+            .ToListAsync();
+    }
+    
+    public async Task<UserAccount?> GetUserByIdAsync(int userId)
+    {
+        return await context.UserAccounts.FindAsync(userId);
+    }
+    
     public async Task AddReviewAsync(Review review)
     {
-        _context.Reviews.Add(review);
-        await _context.SaveChangesAsync();
+        context.Reviews.Add(review);
+        await context.SaveChangesAsync();
     }
     
     public async Task RemoveReviewAsync(Review review)
     {
-        _context.Reviews.Remove(review);
-        await _context.SaveChangesAsync();
+        context.Reviews.Remove(review);
+        await context.SaveChangesAsync();
     }
 }

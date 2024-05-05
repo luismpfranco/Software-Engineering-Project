@@ -31,7 +31,7 @@ public class DatabaseAPI : ControllerBase
 
                     string content = response.Content.ReadAsStringAsync().Result;
 
-                    List<MoviesDTO> filmesDTO = JsonConvert.DeserializeObject<List<MoviesDTO>>(content);
+                    List<MoviesDto> filmesDTO = JsonConvert.DeserializeObject<List<MoviesDto>>(content);
                     List<Movie> filmes = new List<Movie>();
 
                     foreach (var item in filmesDTO)

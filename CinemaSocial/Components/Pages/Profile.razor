@@ -10,23 +10,23 @@
 <div class="p-4 rounded w-25 mx-auto align-items-center justify-content-center bg-light" style="border: 1px solid rgba(0, 0, 0, .125);">
     <h2 class="mt-2 text-center">Profile</h2>
 
-    <h4 class="mt-2 mb-3 pb-4 text-center">Logged in as <span class="text-danger">@username</span></h4>
+    <h4 class="mt-2 mb-3 pb-4 text-center">Logged in as <span class="text-danger">@_username</span></h4>
 
     <div class="nav-item px-3 d-flex justify-content-center">
         <NavLink class="nav-link text-dark" href="/settings">
-            <span class="bi bi-gear-wide-connected fs-5" style="margin-right: 0.75rem;" aria-hidden="true"></span> Settings
+            <span class="bi bi-gear-wide-connected fs-5" style="margin-right: 0.75rem;" aria-hidden="true"></span>Settings
         </NavLink>
     </div>
     <hr class="my-2 custom-hr">
     <div class="nav-item px-3 d-flex justify-content-center">
         <NavLink class="nav-link text-dark" href="/watchlists">
-            <span class="bi bi-card-checklist fs-5" style="margin-right: 0.75rem;" aria-hidden="true"></span> Watchlists
+            <span class="bi bi-card-checklist fs-5" style="margin-right: 0.75rem;" aria-hidden="true"></span>Watchlists
         </NavLink>
     </div>
     <hr class="my-2 custom-hr">
     <div class="nav-item px-3 d-flex justify-content-center">
         <NavLink class="nav-link text-dark" href="/reviews">
-            <span class="bi bi-chat-square-text-fill fs-5" style="margin-right: 0.75rem;" aria-hidden="true"></span> Reviews
+            <span class="bi bi-chat-square-text-fill fs-5" style="margin-right: 0.75rem;" aria-hidden="true"></span>My Reviews
         </NavLink>
     </div>
     <hr class="my-2 custom-hr">
@@ -38,12 +38,12 @@
 </div>
 
 @code {
-    private string username;
+    private string? _username;
 
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        username = authState.User.Identity.Name;
+        _username = authState.User.Identity!.Name;
     }
 
 }

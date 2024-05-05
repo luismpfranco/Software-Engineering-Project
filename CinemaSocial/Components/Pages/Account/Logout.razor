@@ -1,13 +1,15 @@
 @page "/logout"
 @using Microsoft.AspNetCore.Authentication
-@inject NavigationManager navigationManager
+@using Microsoft.AspNetCore.Authorization
+@inject NavigationManager NavigationManager
+@attribute [Authorize(Roles = "Administrator,User")]
 
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-body flex-column">
                 <div class="text-center">
-                    <img src="https://hbr.org/resources/images/article_assets/2020/01/Jan20_24_-200524359.jpg" style="max-height: 36rem"/>
+                    <img src="https://hbr.org/resources/images/article_assets/2020/01/Jan20_24_-200524359.jpg" style="max-height: 36rem" alt="logout image"/>
                 </div>
                 <div class="text-center mt-2">
                     <span class="text-danger fw-bolder">You've successfully logged out of the application.</span>
@@ -19,15 +21,15 @@
 
 @code {
     [CascadingParameter]
-    public HttpContext HttpContext { get; set; }
-    
+    public HttpContext HttpContext { get; set; } = null!;
+
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        if(HttpContext.User.Identity.IsAuthenticated)
+        if(HttpContext.User.Identity!.IsAuthenticated)
         {
             await HttpContext.SignOutAsync();
-            navigationManager.NavigateTo("/logout", true);
+            NavigationManager.NavigateTo("/logout", true);
         }
     }
 }

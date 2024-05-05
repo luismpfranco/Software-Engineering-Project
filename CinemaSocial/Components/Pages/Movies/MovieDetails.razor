@@ -2,10 +2,13 @@
 @using CinemaSocial.Models.Entities
 @using CinemaSocial.Services
 @using System.Security.Claims
+@using Microsoft.AspNetCore.Authorization
 @inject IMovieService MovieService
 @inject WatchlistService WatchlistService
+@inject IReviewService ReviewService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
+@attribute [Authorize(Roles = "Administrator,User")]
 
 @{
     Image image = null!;
@@ -14,78 +17,79 @@
     string starsNames = null!;
     if (MovieInfos != null)
     {
-        image = MovieInfos.Images.FirstOrDefault(i => i!.NumberUrl == "190")!;
+        image = MovieInfos.Images.FirstOrDefault(i => i.NumberUrl == "190")!;
         genreDescription = string.Join(", ", MovieInfos.Genre.Select(g => g.Description));
         directorsNames = string.Join(", ", MovieInfos.Director.Select(d => d.Name));
         starsNames = string.Join(", ", MovieInfos.Stars.Select(s => s.Name));
     }
 }
 
-<AuthorizeView>
-    <Authorized>
-        @if (Id is null)
-        {
-            <p><em>Loading...</em></p>
-        }
-        else
-        {
-            <PageTitle>@MovieInfos?.Title</PageTitle>
-            <div class="hero-bg">
-                <div class="hero-container">
-                    <div class="container-xxl d-flex flex-column flex-md-row">
-                        <div class="flex-grow-1 d-flex align-items-center justify-content-center">
-                            <div class="title-container text-center">
-                                <h1 class="text-dark">@MovieInfos?.Title</h1>
-
-                                <img src="@image.Url" class="" alt="Movie Poster"/>
-
-                                <div class="movie-links">
-                                    <div class="d-flex justify-content-center p-3">
-                                        @if (!string.IsNullOrEmpty(@MovieInfos?.ImdbId))
-                                        {
-                                            <div class="text-center px-2">
-                                                <a href="@MovieInfos.Link" target="_blank" class="btn btn-outline-warning rounded-pill">IMDB</a>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
+<div class="container py-3" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+    @if (Id is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <PageTitle>@MovieInfos?.Title</PageTitle>
+        <h2 class="display-12 my-3 text-center">@MovieInfos?.Title</h2>
+        <div class="mb-5">
+            <div class="movie-box">
+                <img src="@image.Url" class="" alt="Movie Poster"/>
+                <div class="movie-details">
+                    @if (!string.IsNullOrEmpty(@MovieInfos?.ImdbId))
+                    {
+                        <div class="text-end px-2">
+                            <a href="@MovieInfos.Link" target="_blank" class="btn btn-outline-warning rounded-pill">IMDB</a>
                         </div>
-                    </div>
-                </div>
-                <div class="container-xxl">
-                    <div class="overview d-flex flex-column">
-                        <p class="text-dark">Rating: @MovieInfos?.Rating</p>
-                        <p class="text-dark">Year: @MovieInfos?.Year</p>
-                        <p class="text-dark">Genre: @genreDescription</p>
-                        <p class="text-dark">Description: @MovieInfos?.Description</p>
-                        <p class="text-dark">Director: @directorsNames</p>
-                        <p class="text-dark">Cast: @starsNames</p>
-                    </div>
-
-                    <div class="m-5 d-flex justify-content-center align-items-center flex-column flex-wrap">
-                        <h2 class="text-dark">Watchlist</h2>
-                        <button class="btn btn-primary m-3" @onclick="() => AddToFavourites(UserId, MovieId)">Add to Favourites</button>
-                        <span class="@(_isFavouritesSuccessful == true ? "text-success" : "text-danger")">@_messageFavourites</span>
-
-                        <button class="btn btn-primary m-3" @onclick="() => AddWatched(MovieId)">Add to Watched</button>
-                        <span class="@(_isWatchedSuccessful == true ? "text-success" : "text-danger")">@_messageWatched</span>
-
-                        <button class="btn btn-primary m-3" @onclick="() => AddToWatch(MovieId)">Add to Watchlist</button>
-                        <span class="@(_isToWatchSuccessful == true ? "text-success" : "text-danger")">@_messageToWatch</span>
-                    </div>
+                    }
+                    <p>Rating: @MovieInfos?.Rating</p>
+                    <p>Year: @MovieInfos?.Year</p>
+                    <p>Genre: @genreDescription</p>
+                    <p>Description: @MovieInfos?.Description</p>
+                    <p>Director: @directorsNames</p>
+                    <p>Cast: @starsNames</p>
                 </div>
             </div>
-        }
-    </Authorized>
-    <NotAuthorized>
-        <div class="d-flex flex-column justify-content-center align-items-center">
-            <h3 class="m-5">You are not authorized to view this page.</h3>
-            <h5>Please <a class="fw-bolder" href="/login">click here</a> to login.</h5>
-            <h5 class="mt-3">Or you can create an account. <a class="fw-bolder" href="/signup">Click here</a> to sign up.</h5>
         </div>
-    </NotAuthorized>
-</AuthorizeView>
+        
+        <div class="m-5 d-flex justify-content-center align-items-center flex-column flex-wrap">
+            <h2 class="text-dark">Watchlist</h2>
+            <button class="btn btn-primary m-3" @onclick="() => AddToFavourites(UserId, MovieId)">Add to Favourites</button>
+            <span class="@(_isFavouritesSuccessful == true ? "text-success" : "text-danger")">@_messageFavourites</span>
+
+            <button class="btn btn-primary m-3" @onclick="() => AddWatched(MovieId)">Add to Watched</button>
+            <span class="@(_isWatchedSuccessful == true ? "text-success" : "text-danger")">@_messageWatched</span>
+
+            <button class="btn btn-primary m-3" @onclick="() => AddToWatch(MovieId)">Add to Watchlist</button>
+            <span class="@(_isToWatchSuccessful == true ? "text-success" : "text-danger")">@_messageToWatch</span>
+        </div>
+
+        @if (_reviews != null)
+        {
+            <div class="m-5 d-flex justify-content-center align-items-center flex-column flex-wrap">
+                <h2 class="text-dark mb-3">Reviews</h2>
+                @if(_reviews.Count == 0)
+                {
+                    <p class="text-dark">No reviews yet.</p>
+                }
+                else
+                {
+                    @foreach (var review in _reviews)
+                    {
+                        <div class="card mb-3" style="border-radius: 20px;">
+                            <div class="card-body">
+                                <h5 class="card-title">By: @review.User.UserName</h5>
+                                <p class="card-text">Comment: @review.Description</p>
+                                <p class="card-text"><small class="text-muted">Rating: @review.Rate</small></p>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        }
+    }
+</div>
 
 
 @code {
@@ -97,6 +101,8 @@
     private int UserId { get; set; }
 
     private Movie? MovieInfos { get; set; }
+    
+    private List<Review>? _reviews;
 
     private string? _messageFavourites;
     private bool? _isFavouritesSuccessful;
@@ -108,6 +114,7 @@
     protected override async Task OnInitializedAsync()
     {
         MovieInfos = await MovieService.GetMovieByIdAsync(MovieId);
+        _reviews = await ReviewService.GetReviewsAsync(MovieId);
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         if (authState.User.Identity!.IsAuthenticated)
         {

@@ -1,10 +1,10 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using CinemaSocial.Models.Entities;
+
+namespace CinemaSocial.Services;
 
 public interface IReviewService
 {
-    Task<List<Review>> GetReviewsAsync();
-    Task AddReviewAsync(Review review);
+    Task<List<Review>> GetReviewsAsync(int userId);
+    Task<List<Review>> GetReviewsAsync(Guid movieId);
     Task RemoveReviewAsync(Review review);
 }

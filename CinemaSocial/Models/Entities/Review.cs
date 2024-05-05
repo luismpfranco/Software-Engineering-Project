@@ -7,11 +7,11 @@ namespace CinemaSocial.Models.Entities;
 public class Review
 {
     [Key]
-    public Guid Id { get; set; }
-    public Guid MovieId { get; set; }
-    public int UserId { get; set; }
-    public int Rate { get; set; }
-    public string Description { get; set; }
-    public Movie Movie { get; set; }
+    public Guid Id { get; init; }
+    public Guid MovieId { get; init; }
+    public int UserId { get; init; }
+    public int Rate { get; init; }
+    public string Description { get; init; }
+    public Movie Movie { get; }
     public UserAccount User { get; set; }
 }
