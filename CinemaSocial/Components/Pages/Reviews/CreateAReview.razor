@@ -1,12 +1,12 @@
 @page "/reviews/create"
 @using System.Security.Claims
 @using CinemaSocial.Models.Entities
-@using CinemaSocial.Services
+@using CinemaSocial.Repository
 @using Microsoft.AspNetCore.Authorization
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
-@inject ReviewService ReviewService
-@inject IMovieService MovieService
+@inject ReviewRepository ReviewRepository
+@inject IMovieRepository MovieRepository
 @rendermode InteractiveServer
 @attribute [Authorize(Roles = "Administrator,User")]
 <h3>Create a Review</h3>
@@ -102,7 +102,7 @@
         if (userIdClaim != null)
         {
             _userId = int.Parse(userIdClaim);
-            Movies = await MovieService.GetMoviesAsync();
+            Movies = await MovieRepository.GetMoviesAsync();
             Guid.TryParse(SelectedMovieId, out var movieIdGuid);
             SelectedMovie = Movies.FirstOrDefault(m => m.IdMovie == movieIdGuid);
         }
@@ -120,14 +120,14 @@
             Description = _review
         };
 
-        await ReviewService.AddReviewAsync(newReview);
+        await ReviewRepository.AddReviewAsync(newReview);
         NavigationManager.NavigateTo("/reviews");
     }
 
     private async Task UpdateSearchResults(ChangeEventArgs e)
     {
         _searchTerm = e.Value!.ToString()!;
-        _searchResults = (!string.IsNullOrEmpty(_searchTerm) ? (await MovieService.GetMoviesAsync()).Where(m => m.Title.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase)).ToList() : null)!;
+        _searchResults = (!string.IsNullOrEmpty(_searchTerm) ? (await MovieRepository.GetMoviesAsync()).Where(m => m.Title.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase)).ToList() : null)!;
         StateHasChanged();
     }
 

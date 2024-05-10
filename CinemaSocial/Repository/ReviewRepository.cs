@@ -2,9 +2,9 @@ using CinemaSocial.Data;
 using CinemaSocial.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaSocial.Services;
+namespace CinemaSocial.Repository;
 
-public class ReviewService(AppDbContext context) : IReviewService
+public class ReviewRepository(AppDbContext context) : IReviewRepository
 {
     public async Task<List<Review>> GetReviewsAsync(int userId)
     {

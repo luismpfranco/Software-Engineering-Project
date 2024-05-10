@@ -1,7 +1,7 @@
 using CinemaSocial.Components;
 using CinemaSocial.Components.Pages.Movies;
 using CinemaSocial.Data;
-using CinemaSocial.Services;
+using CinemaSocial.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,13 +29,13 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddControllers();
 
 builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri("http://localhost:7237") });
-builder.Services.AddScoped<IMovieService, MovieService>();
-builder.Services.AddScoped<WatchlistService>();
-builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<WatchlistRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<MovieDetails>();
-builder.Services.AddScoped<MovieService>();
-builder.Services.AddScoped < ReviewService>();
-builder.Services.AddScoped<ILikeService, LikeService>();
+builder.Services.AddScoped<MovieRepository>();
+builder.Services.AddScoped < ReviewRepository>();
+builder.Services.AddScoped<ILikeRepository, LikeRepository>();
 
 var app = builder.Build();
 

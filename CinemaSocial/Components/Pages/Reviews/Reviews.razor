@@ -1,11 +1,11 @@
 @page "/reviews"
 @using System.Security.Claims
 @using CinemaSocial.Models.Entities;
-@using CinemaSocial.Services
+@using CinemaSocial.Repository
 @using Microsoft.AspNetCore.Authorization
-@inject IReviewService ReviewService
+@inject IReviewRepository ReviewRepository
 @inject NavigationManager NavigationManager
-@inject MovieService MovieService
+@inject MovieRepository MovieRepository
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
 @attribute [Authorize(Roles = "Administrator,User")]
@@ -20,7 +20,7 @@
     {
         foreach (var review in ReviewedMovies)
         {
-            var movie = MovieService.GetMovieByIdAsync(review.MovieId);
+            var movie = MovieRepository.GetMovieByIdAsync(review.MovieId);
             var imageUrl = movie.Result!.Images.FirstOrDefault(i => i.NumberUrl == "190");
             if (imageUrl != null)
             {
@@ -69,7 +69,7 @@
             <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
                 @foreach (var review in RatedMovies)
                 {
-                    var movie = MovieService.GetMovieByIdAsync(review.MovieId);
+                    var movie = MovieRepository.GetMovieByIdAsync(review.MovieId);
                     var imageUrl = movie.Result!.Images.FirstOrDefault(i => i.NumberUrl == "190");
                     if (imageUrl != null)
                     {
@@ -114,7 +114,7 @@
             if(userIdClaim != null)
             {
                 UserId = int.Parse(userIdClaim);
-                var allReviews = await ReviewService.GetReviewsAsync(UserId);
+                var allReviews = await ReviewRepository.GetReviewsAsync(UserId);
                 ReviewedMovies = allReviews.Where(r => r.Description != "None").ToList();
                 RatedMovies = allReviews.Where(r => r.Description == "None").ToList();
             }
@@ -127,13 +127,13 @@
 
     private async Task RemoveReviewedMovie(Review review)
     {
-        await ReviewService.RemoveReviewAsync(review);
+        await ReviewRepository.RemoveReviewAsync(review);
         ReviewedMovies!.Remove(review);
     }
     
     private async Task RemoveRatedMovie(Review review)
     {
-        await ReviewService.RemoveReviewAsync(review);
+        await ReviewRepository.RemoveReviewAsync(review);
         RatedMovies!.Remove(review);
     }
 }

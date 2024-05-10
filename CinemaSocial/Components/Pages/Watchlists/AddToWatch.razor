@@ -1,13 +1,13 @@
 @page "/addtowatch"
 @using System.Security.Claims
 @using CinemaSocial.Models.Entities
-@using CinemaSocial.Services
+@using CinemaSocial.Repository
 @using Microsoft.AspNetCore.Authorization
-@inject IMovieService MovieService
+@inject IMovieRepository MovieRepository
 @rendermode InteractiveServer
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
-@inject WatchlistService WatchlistService
+@inject WatchlistRepository WatchlistRepository
 @attribute [Authorize(Roles = "Administrator,User")]
 <PageTitle>Add to To Watch</PageTitle>
 
@@ -48,13 +48,13 @@
     private async Task UpdateSearchResults(ChangeEventArgs e)
     {
         _searchTerm = e.Value!.ToString()!;
-        _searchResults = (!string.IsNullOrEmpty(_searchTerm) ? (await MovieService.GetMoviesAsync()).Where(m => m!.Title.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase)).ToList() : null)!;
+        _searchResults = (!string.IsNullOrEmpty(_searchTerm) ? (await MovieRepository.GetMoviesAsync()).Where(m => m!.Title.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase)).ToList() : null)!;
         StateHasChanged();
     }
 
     async void AddToWatchList(int userId, Guid movieId)
     {
-        var isAlreadyInToWatch = await WatchlistService.IsInToWatchAsync(userId, movieId);
+        var isAlreadyInToWatch = await WatchlistRepository.IsInToWatchAsync(userId, movieId);
         if (isAlreadyInToWatch)
         {
             _messageToWatch = "This movie is already in your watchlist To Watch";
@@ -62,7 +62,7 @@
         }
         else
         {
-            await WatchlistService.AddToWatchAsync(userId, movieId);
+            await WatchlistRepository.AddToWatchAsync(userId, movieId);
             NavigationManager.NavigateTo("/watchlists");
         }
     }

@@ -1,8 +1,8 @@
 using CinemaSocial.Models.Entities;
 
-namespace CinemaSocial.Services;
+namespace CinemaSocial.Repository;
 
-public interface ILikeService
+public interface ILikeRepository
 {
     Task AddLike(Guid reviewId, int userId);
     Task AddDislike(Guid reviewId, int userId);

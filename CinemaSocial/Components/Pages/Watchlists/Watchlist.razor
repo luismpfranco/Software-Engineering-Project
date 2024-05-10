@@ -2,10 +2,10 @@
 @using System.Security.Claims
 @using CinemaSocial.Models.Entities
 @using CinemaSocial.Models.Entities.Watchlists
-@using CinemaSocial.Services
+@using CinemaSocial.Repository
 @using Microsoft.AspNetCore.Authorization
-@inject WatchlistService WatchlistService
-@inject IMovieService MovieService
+@inject WatchlistRepository WatchlistRepository
+@inject IMovieRepository MovieRepository
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @attribute [Authorize(Roles = "Administrator,User")]
@@ -172,28 +172,28 @@
             else
             {
                 UserId = int.Parse(userIdClaim);
-                WatchlistFavourites = await WatchlistService.GetWatchlistFavouritesAsync(UserId);
-                WatchlistWatched = await WatchlistService.GetWatchlistWatchedAsync(UserId);
-                WatchlistToWatch = await WatchlistService.GetWatchlistToWatchAsync(UserId);
+                WatchlistFavourites = await WatchlistRepository.GetWatchlistFavouritesAsync(UserId);
+                WatchlistWatched = await WatchlistRepository.GetWatchlistWatchedAsync(UserId);
+                WatchlistToWatch = await WatchlistRepository.GetWatchlistToWatchAsync(UserId);
                 
                 FavouriteMovies = new List<Movie>();
                 foreach (var item in WatchlistFavourites!)
                 {
-                    var movie = await MovieService.GetMovieByIdAsync(item.MovieId);
+                    var movie = await MovieRepository.GetMovieByIdAsync(item.MovieId);
                     FavouriteMovies.Add(movie!);
                 }
 
                 WatchedMovies = new List<Movie>();
                 foreach (var item in WatchlistWatched!)
                 {
-                    var movie = await MovieService.GetMovieByIdAsync(item.MovieId);
+                    var movie = await MovieRepository.GetMovieByIdAsync(item.MovieId);
                     WatchedMovies.Add(movie!);
                 }
 
                 ToWatchMovies = new List<Movie>();
                 foreach (var item in WatchlistToWatch!)
                 {
-                    var movie = await MovieService.GetMovieByIdAsync(item.MovieId);
+                    var movie = await MovieRepository.GetMovieByIdAsync(item.MovieId);
                     ToWatchMovies.Add(movie!);
                 }
             }
@@ -206,21 +206,21 @@
 
     async void RemoveFromFavourites(Guid movieId)
     {
-       await WatchlistService.RemoveFromFavouritesAsync(UserId, movieId);
+       await WatchlistRepository.RemoveFromFavouritesAsync(UserId, movieId);
        FavouriteMovies = FavouriteMovies!.Where(m => m.IdMovie != movieId).ToList();
        StateHasChanged();
     }
     
     async void RemoveFromWatched(Guid movieId)
     {
-        await WatchlistService.RemoveFromWatchedAsync(UserId, movieId);
+        await WatchlistRepository.RemoveFromWatchedAsync(UserId, movieId);
         WatchedMovies = WatchedMovies!.Where(m => m.IdMovie != movieId).ToList();
         StateHasChanged();
     }
 
     async void RemoveFromToWatch(Guid movieId)
     {
-        await WatchlistService.RemoveFromWatchAsync(UserId, movieId);
+        await WatchlistRepository.RemoveFromWatchAsync(UserId, movieId);
         ToWatchMovies = ToWatchMovies!.Where(m => m.IdMovie != movieId).ToList();
         StateHasChanged();
     }

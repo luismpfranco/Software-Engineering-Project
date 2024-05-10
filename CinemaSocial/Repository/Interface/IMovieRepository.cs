@@ -1,8 +1,8 @@
 using CinemaSocial.Models.Entities;
 
-namespace CinemaSocial.Services;
+namespace CinemaSocial.Repository;
 
-public interface IMovieService
+public interface IMovieRepository
 {
     Task<List<Movie?>> GetMoviesAsync();
     Task<Movie?> GetMovieByIdAsync(Guid id);

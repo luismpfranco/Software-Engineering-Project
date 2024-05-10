@@ -2,9 +2,9 @@
 using CinemaSocial.Models.Entities.Watchlists;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaSocial.Services;
+namespace CinemaSocial.Repository;
 
-public class WatchlistService(AppDbContext context)
+public class WatchlistRepository(AppDbContext context)
 {
     public async Task<List<WatchlistFavourites>?> GetWatchlistFavouritesAsync(int userId)
     {

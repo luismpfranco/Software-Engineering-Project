@@ -2,9 +2,9 @@ using CinemaSocial.Data;
 using CinemaSocial.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaSocial.Services;
+namespace CinemaSocial.Repository;
 
-public class LikeService(AppDbContext context) : ILikeService
+public class LikeRepository(AppDbContext context) : ILikeRepository
 {
     public async Task AddLike(Guid reviewId, int userId)
     {

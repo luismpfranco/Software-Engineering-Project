@@ -1,11 +1,11 @@
 @page "/otherReviews"
 @using System.Security.Claims
 @using CinemaSocial.Models.Entities
-@using CinemaSocial.Services
+@using CinemaSocial.Repository
 @using Microsoft.AspNetCore.Authorization
-@inject ReviewService ReviewService
-@inject MovieService MovieService
-@inject ILikeService LikeService
+@inject ReviewRepository ReviewRepository
+@inject MovieRepository MovieRepository
+@inject ILikeRepository LikeRepository
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
@@ -26,11 +26,11 @@
         <div class="mb-5">
             @foreach (var review in _reviews)
             {
-                var movie = MovieService.GetMovieByIdAsync(review.MovieId);
+                var movie = MovieRepository.GetMovieByIdAsync(review.MovieId);
                 var imageUrl = movie.Result!.Images.FirstOrDefault(i => i.NumberUrl == "190");
-                var user = ReviewService.GetUserByIdAsync(review.UserId);
-                var likes = LikeService.GetLikesAsync(review.Id).Result;
-                var dislikes = LikeService.GetDislikesAsync(review.Id).Result;
+                var user = ReviewRepository.GetUserByIdAsync(review.UserId);
+                var likes = LikeRepository.GetLikesAsync(review.Id).Result;
+                var dislikes = LikeRepository.GetDislikesAsync(review.Id).Result;
                 if(imageUrl != null)
                 {
                     <div class="movie-box">
@@ -90,12 +90,12 @@
             if (userIdClaim != null)
             {
                 UserId = int.Parse(userIdClaim);
-                _allReviews = await ReviewService.GetReviewsAsync();
+                _allReviews = await ReviewRepository.GetReviewsAsync();
                 _reviews = _allReviews.Where(r => r.Description != "None").ToList();
 
                 foreach (var review in _reviews)
                 {
-                    var existingLike = await LikeService.GetLike(review.Id, UserId);
+                    var existingLike = await LikeRepository.GetLike(review.Id, UserId);
                     _likeStates[review.Id] = existingLike is { IsLike: true };
                     _dislikeStates[review.Id] = existingLike is { IsLike: false };
                 }
@@ -113,8 +113,8 @@
     
     async Task UpdateLikeState(Guid reviewId, int userId)
     {
-        await LikeService.AddLike(reviewId, userId);
-        var existingLike = await LikeService.GetLike(reviewId, userId);
+        await LikeRepository.AddLike(reviewId, userId);
+        var existingLike = await LikeRepository.GetLike(reviewId, userId);
         _likeStates[reviewId] = existingLike is { IsLike: true };
         if (existingLike is { IsLike: true })
         {
@@ -125,8 +125,8 @@
 
     async Task UpdateDislikeState(Guid reviewId, int userId)
     {
-        await LikeService.AddDislike(reviewId, userId);
-        var existingLike = await LikeService.GetLike(reviewId, userId);
+        await LikeRepository.AddDislike(reviewId, userId);
+        var existingLike = await LikeRepository.GetLike(reviewId, userId);
         _dislikeStates[reviewId] = existingLike is { IsLike: false };
         if (existingLike is { IsLike: false })
         {

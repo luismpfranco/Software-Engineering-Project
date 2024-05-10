@@ -2,9 +2,9 @@ using CinemaSocial.Data;
 using CinemaSocial.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CinemaSocial.Services;
+namespace CinemaSocial.Repository;
 
-public class MovieService(AppDbContext context) : IMovieService
+public class MovieRepository(AppDbContext context) : IMovieRepository
 {
     public async Task<List<Movie?>> GetMoviesAsync()
     {    

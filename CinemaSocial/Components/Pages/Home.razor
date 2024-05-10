@@ -1,9 +1,9 @@
 ﻿@page "/"
 @using CinemaSocial.Models.Entities
-@using CinemaSocial.Services
+@using CinemaSocial.Repository
 @using CinemaSocial.Components.Pages.Movies
 @using Microsoft.AspNetCore.Authorization
-@inject IMovieService MovieService
+@inject IMovieRepository MovieService
 @rendermode InteractiveServer
 @attribute [Authorize(Roles = "Administrator,User")]
 

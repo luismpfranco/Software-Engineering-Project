@@ -1,11 +1,11 @@
 @page "/movie/{id}"
 @using CinemaSocial.Models.Entities
-@using CinemaSocial.Services
+@using CinemaSocial.Repository
 @using System.Security.Claims
 @using Microsoft.AspNetCore.Authorization
-@inject IMovieService MovieService
-@inject WatchlistService WatchlistService
-@inject IReviewService ReviewService
+@inject IMovieRepository MovieRepository
+@inject WatchlistRepository WatchlistRepository
+@inject IReviewRepository ReviewRepository
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @rendermode InteractiveServer
 @attribute [Authorize(Roles = "Administrator,User")]
@@ -113,8 +113,8 @@
     
     protected override async Task OnInitializedAsync()
     {
-        MovieInfos = await MovieService.GetMovieByIdAsync(MovieId);
-        _reviews = await ReviewService.GetReviewsAsync(MovieId);
+        MovieInfos = await MovieRepository.GetMovieByIdAsync(MovieId);
+        _reviews = await ReviewRepository.GetReviewsAsync(MovieId);
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         if (authState.User.Identity!.IsAuthenticated)
         {
@@ -137,7 +137,7 @@
     
     async void AddToFavourites(int userId, Guid movieId)
     {
-        var isAlreadyInFavourites = await WatchlistService.IsInFavouritesAsync(userId, movieId);
+        var isAlreadyInFavourites = await WatchlistRepository.IsInFavouritesAsync(userId, movieId);
         if (isAlreadyInFavourites)
         {
             _messageFavourites = "This movie is already in your watchlist Favourites";
@@ -145,7 +145,7 @@
         }
         else
         {
-            await WatchlistService.AddToFavouritesAsync(userId, movieId);
+            await WatchlistRepository.AddToFavouritesAsync(userId, movieId);
             _messageFavourites = "This movie was successfully added to your watchlist Favourites";
             _isFavouritesSuccessful = true;
         }
@@ -153,7 +153,7 @@
 
     async void AddWatched(Guid movieId)
     {
-        var isAlreadyInWatched = await WatchlistService.IsInWatchedAsync(UserId, movieId);
+        var isAlreadyInWatched = await WatchlistRepository.IsInWatchedAsync(UserId, movieId);
         if (isAlreadyInWatched)
         {
             _messageWatched = "This movie is already in your watchlist Watched.";
@@ -161,7 +161,7 @@
         }
         else
         {
-            await WatchlistService.AddWatchedAsync(UserId, movieId);
+            await WatchlistRepository.AddWatchedAsync(UserId, movieId);
             _messageWatched = "This movie was successfully added to your watchlist Watched";
             _isWatchedSuccessful = true;
         }
@@ -169,7 +169,7 @@
     
     async void AddToWatch(Guid movieId)
     {
-        var isAlreadyInToWatch = await WatchlistService.IsInToWatchAsync(UserId, movieId);
+        var isAlreadyInToWatch = await WatchlistRepository.IsInToWatchAsync(UserId, movieId);
         if (isAlreadyInToWatch)
         {
             _messageToWatch = "This movie is already in your watchlist To Watch.";
@@ -177,7 +177,7 @@
         }
         else
         {
-            await WatchlistService.AddToWatchAsync(UserId, movieId);
+            await WatchlistRepository.AddToWatchAsync(UserId, movieId);
             _messageToWatch = "This movie was successfully added to your watchlist To Watch";
             _isToWatchSuccessful = true;
         }
