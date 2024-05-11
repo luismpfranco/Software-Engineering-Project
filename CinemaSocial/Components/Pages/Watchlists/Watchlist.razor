@@ -27,7 +27,7 @@
         </h3>
         <div class="scroll-container">
             <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
-                @if (FavouriteMovies!.Count == 0)
+                @if (FavouriteMovies == null || FavouriteMovies.Count == 0)
                 {
                     <p class="fs-5 mt-3 mb-5"><em>There are no movies added to this watchlist.</em></p>
                 }
@@ -68,7 +68,7 @@
         </h3>
         <div class="scroll-container">
             <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
-                @if (WatchedMovies!.Count == 0)
+                @if (WatchedMovies == null || WatchedMovies.Count == 0)
                 {
                     <p class="fs-5 mt-3 mb-5"><em>There are no movies added to this watchlist.</em></p>
                 }
@@ -109,7 +109,7 @@
         </h3>
         <div class="scroll-container mb-5">
             <div class="flex-nowrap display-flex row row-cols-2 row-cols-lg-5 row-cols-xl-5 justify-content-center justify-content-md-start">
-                @if (ToWatchMovies!.Count == 0)
+                @if (ToWatchMovies == null || ToWatchMovies.Count == 0)
                 {
                     <p class="fs-5 mt-3 mb-5"><em>There are no movies added to this watchlist.</em></p>
                 }

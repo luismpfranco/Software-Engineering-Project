@@ -3,8 +3,8 @@
 @using CinemaSocial.Models.Entities
 @using CinemaSocial.Repository
 @using Microsoft.AspNetCore.Authorization
-@inject ReviewRepository ReviewRepository
-@inject MovieRepository MovieRepository
+@inject IReviewRepository ReviewRepository
+@inject IMovieRepository MovieRepository
 @inject ILikeRepository LikeRepository
 @inject NavigationManager NavigationManager
 @inject AuthenticationStateProvider AuthenticationStateProvider

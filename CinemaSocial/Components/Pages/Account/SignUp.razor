@@ -119,14 +119,14 @@
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.Name, userAccount.UserName!),
-            new Claim(ClaimTypes.Role, userAccount.Role)
+            new Claim(ClaimTypes.Role, userAccount.Role),
+            new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString())
         };
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
         var principal = new ClaimsPrincipal(identity);
-
         await HttpContext!.SignInAsync(principal);
-
+        
         AgreeWithTerms();
 
         NavigationManager.NavigateTo("/profile");

@@ -1,5 +1,4 @@
 using CinemaSocial.Data;
-using CinemaSocial.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace CinemaSocial.Patterns.Command;

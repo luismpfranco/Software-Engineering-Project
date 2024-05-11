@@ -1,6 +1,5 @@
 using CinemaSocial.Data;
 using CinemaSocial.Models.Entities.Watchlists;
-using CinemaSocial.Repository;
 
 namespace CinemaSocial.Patterns.Strategy;
 
