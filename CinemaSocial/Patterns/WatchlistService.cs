@@ -7,12 +7,10 @@ namespace CinemaSocial.Patterns;
 public class WatchlistService
 {
     private readonly IWatchlistStrategy _strategy;
-    private readonly IWatchlistRepository _repository;
 
-    public WatchlistService(IWatchlistStrategy strategy, IWatchlistRepository repository)
+    public WatchlistService(IWatchlistStrategy strategy)
     {
         _strategy = strategy;
-        _repository = repository;
     }
 
     public async Task AddToFavourites(int userId, Guid movieId)

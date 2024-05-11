@@ -10,7 +10,6 @@
 @rendermode InteractiveServer
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
-@inject IWatchlistRepository WatchlistRepository
 @inject AppDbContext DbContext
 @attribute [Authorize(Roles = "Administrator,User")]
 <PageTitle>Add to To Watch</PageTitle>
@@ -58,7 +57,8 @@
 
     async void AddToWatchList(int userId, Guid movieId)
     {
-        var isAlreadyInToWatch = await WatchlistRepository.IsInToWatchAsync(userId, movieId);
+        var addToWatchStrategy = new AddToWatchStrategy(DbContext);
+        var isAlreadyInToWatch = await addToWatchStrategy.IsInWatchlistAsync(userId, movieId);
         if (isAlreadyInToWatch)
         {
             _messageToWatch = "This movie is already in your watchlist To Watch";
@@ -66,8 +66,7 @@
         }
         else
         {
-            var addToWatchStrategy = new AddToWatchStrategy(DbContext);
-            WatchlistService service = new WatchlistService(addToWatchStrategy, WatchlistRepository);
+            WatchlistService service = new WatchlistService(addToWatchStrategy);
             await service.AddToWatch(userId, movieId);
             NavigationManager.NavigateTo("/watchlists");
         }

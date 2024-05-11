@@ -26,19 +26,4 @@ public class WatchlistRepository(AppDbContext context) : IWatchlistRepository
             .Where(w => w.UserId == userId)
             .ToListAsync();
     }
-    
-    public async Task<bool> IsInFavouritesAsync(int userId, Guid movieId)
-    {
-        return await context.WatchlistFavourites.AnyAsync(f => f.UserId == userId && f.MovieId == movieId);
-    }
-    
-    public async Task<bool> IsInWatchedAsync(int userId, Guid movieId)
-    {
-        return await context.WatchlistWatched.AnyAsync(f => f.UserId == userId && f.MovieId == movieId);
-    }
-    
-    public async Task<bool> IsInToWatchAsync(int userId, Guid movieId)
-    {
-        return await context.WatchlistToWatch.AnyAsync(f => f.UserId == userId && f.MovieId == movieId);
-    }
 }

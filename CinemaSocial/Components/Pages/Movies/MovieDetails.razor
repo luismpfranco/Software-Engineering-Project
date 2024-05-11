@@ -141,7 +141,8 @@
     
     async void AddToFavourites(int userId, Guid movieId)
     {
-        var isAlreadyInFavourites = await WatchlistRepository.IsInFavouritesAsync(userId, movieId);
+        var addToFavouritesStrategy = new AddToFavouritesStrategy(DbContext);
+        var isAlreadyInFavourites = await addToFavouritesStrategy.IsInWatchlistAsync(userId, movieId);
         if (isAlreadyInFavourites)
         {
             _messageFavourites = "This movie is already in your watchlist Favourites";
@@ -149,8 +150,7 @@
         }
         else
         {
-            var addToFavouritesStrategy = new AddToFavouritesStrategy(DbContext);
-            WatchlistService service = new WatchlistService(addToFavouritesStrategy, WatchlistRepository);
+            WatchlistService service = new WatchlistService(addToFavouritesStrategy);
             await service.AddToFavourites(userId, movieId);
             _messageFavourites = "This movie was successfully added to your watchlist Favourites";
             _isFavouritesSuccessful = true;
@@ -159,7 +159,8 @@
 
     async void AddWatched(Guid movieId)
     {
-        var isAlreadyInWatched = await WatchlistRepository.IsInWatchedAsync(UserId, movieId);
+        var addToWatchedStrategy = new AddToWatchedStrategy(DbContext);
+        var isAlreadyInWatched = await addToWatchedStrategy.IsInWatchlistAsync(UserId, movieId);
         if (isAlreadyInWatched)
         {
             _messageWatched = "This movie is already in your watchlist Watched.";
@@ -167,8 +168,7 @@
         }
         else
         {
-            var addToWatchedStrategy = new AddToWatchedStrategy(DbContext);
-            WatchlistService service = new WatchlistService(addToWatchedStrategy, WatchlistRepository);
+            WatchlistService service = new WatchlistService(addToWatchedStrategy);
             await service.AddToWatched(UserId, movieId);
             _messageWatched = "This movie was successfully added to your watchlist Watched";
             _isWatchedSuccessful = true;
@@ -177,7 +177,8 @@
     
     async void AddToWatch(Guid movieId)
     {
-        var isAlreadyInToWatch = await WatchlistRepository.IsInToWatchAsync(UserId, movieId);
+        var addToWatchStrategy = new AddToWatchStrategy(DbContext);
+        var isAlreadyInToWatch = await addToWatchStrategy.IsInWatchlistAsync(UserId, movieId);
         if (isAlreadyInToWatch)
         {
             _messageToWatch = "This movie is already in your watchlist To Watch.";
@@ -185,8 +186,7 @@
         }
         else
         {
-            var addToWatchStrategy = new AddToWatchStrategy(DbContext);
-            WatchlistService service = new WatchlistService(addToWatchStrategy, WatchlistRepository);
+            WatchlistService service = new WatchlistService(addToWatchStrategy);
             await service.AddToWatch(UserId, movieId);
             _messageToWatch = "This movie was successfully added to your watchlist To Watch";
             _isToWatchSuccessful = true;

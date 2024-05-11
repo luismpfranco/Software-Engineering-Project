@@ -10,7 +10,6 @@
 @rendermode InteractiveServer
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
-@inject IWatchlistRepository WatchlistRepository
 @inject AppDbContext DbContext
 @attribute [Authorize(Roles = "Administrator,User")]
 
@@ -59,7 +58,8 @@
 
     async void AddToFavouritesList(int userId, Guid movieId)
     {
-        var isAlreadyInFavourites = await WatchlistRepository.IsInFavouritesAsync(userId, movieId);
+        var addToFavouritesStrategy = new AddToFavouritesStrategy(DbContext);
+        var isAlreadyInFavourites = await addToFavouritesStrategy.IsInWatchlistAsync(userId, movieId);
         if (isAlreadyInFavourites)
         {
             _messageFavourites = "This movie is already in your watchlist Favourites";
@@ -67,8 +67,7 @@
         }
         else
         {
-            var addToFavouritesStrategy = new AddToFavouritesStrategy(DbContext);
-            WatchlistService service = new WatchlistService(addToFavouritesStrategy, WatchlistRepository);
+            WatchlistService service = new WatchlistService(addToFavouritesStrategy);
             await service.AddToFavourites(userId, movieId);
             NavigationManager.NavigateTo("/watchlists");
         }
