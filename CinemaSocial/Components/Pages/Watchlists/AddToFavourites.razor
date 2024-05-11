@@ -1,13 +1,17 @@
 @page "/addtofavourites"
 @using System.Security.Claims
+@using CinemaSocial.Data
 @using CinemaSocial.Models.Entities
+@using CinemaSocial.Patterns
+@using CinemaSocial.Patterns.Strategy
 @using CinemaSocial.Repository
 @using Microsoft.AspNetCore.Authorization
 @inject IMovieRepository MovieRepository
 @rendermode InteractiveServer
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
-@inject WatchlistRepository WatchlistRepository
+@inject IWatchlistRepository WatchlistRepository
+@inject AppDbContext DbContext
 @attribute [Authorize(Roles = "Administrator,User")]
 
 <PageTitle>Add to Favourites</PageTitle>
@@ -63,7 +67,9 @@
         }
         else
         {
-            await WatchlistRepository.AddToFavouritesAsync(userId, movieId);
+            var addToFavouritesStrategy = new AddToFavouritesStrategy(DbContext);
+            WatchlistService service = new WatchlistService(addToFavouritesStrategy, WatchlistRepository);
+            await service.AddToFavourites(userId, movieId);
             NavigationManager.NavigateTo("/watchlists");
         }
     }

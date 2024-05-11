@@ -27,11 +27,4 @@ public class MovieRepository(AppDbContext context) : IMovieRepository
             .Include(m => m.Images)
             .FirstOrDefaultAsync(m => m.IdMovie == id);
     }
-    
-    public async Task<List<Movie>> SearchMoviesAsync(string searchTerm)
-    {
-        return await context.Movies
-            .Where(m => m.Title.Contains(searchTerm))
-            .ToListAsync();
-    }
 }

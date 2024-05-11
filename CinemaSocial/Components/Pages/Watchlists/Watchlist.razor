@@ -1,13 +1,18 @@
 ﻿@page "/watchlists"
 @using System.Security.Claims
+@using CinemaSocial.Data
 @using CinemaSocial.Models.Entities
 @using CinemaSocial.Models.Entities.Watchlists
+@using CinemaSocial.Patterns
+@using CinemaSocial.Patterns.Command
 @using CinemaSocial.Repository
 @using Microsoft.AspNetCore.Authorization
-@inject WatchlistRepository WatchlistRepository
+@inject IWatchlistRepository WatchlistRepository
 @inject IMovieRepository MovieRepository
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
+@inject WatchlistService WatchlistService
+@inject AppDbContext DbContext
 @attribute [Authorize(Roles = "Administrator,User")]
 @rendermode InteractiveServer
 
@@ -206,21 +211,24 @@
 
     async void RemoveFromFavourites(Guid movieId)
     {
-       await WatchlistRepository.RemoveFromFavouritesAsync(UserId, movieId);
+        var command = new RemoveFromFavouritesCommand(DbContext);
+        await WatchlistService.ExecuteCommand(command, UserId, movieId);
        FavouriteMovies = FavouriteMovies!.Where(m => m.IdMovie != movieId).ToList();
        StateHasChanged();
     }
     
     async void RemoveFromWatched(Guid movieId)
     {
-        await WatchlistRepository.RemoveFromWatchedAsync(UserId, movieId);
+        var command = new RemoveFromWatchedCommand(DbContext);
+        await WatchlistService.ExecuteCommand(command, UserId, movieId);
         WatchedMovies = WatchedMovies!.Where(m => m.IdMovie != movieId).ToList();
         StateHasChanged();
     }
 
     async void RemoveFromToWatch(Guid movieId)
     {
-        await WatchlistRepository.RemoveFromWatchAsync(UserId, movieId);
+        var command = new RemoveFromWatchCommand(DbContext);
+        await WatchlistService.ExecuteCommand(command, UserId, movieId);
         ToWatchMovies = ToWatchMovies!.Where(m => m.IdMovie != movieId).ToList();
         StateHasChanged();
     }

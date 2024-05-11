@@ -1,13 +1,17 @@
 @page "/addtowatched"
 @using System.Security.Claims
+@using CinemaSocial.Data
 @using CinemaSocial.Models.Entities
+@using CinemaSocial.Patterns
+@using CinemaSocial.Patterns.Strategy
 @using CinemaSocial.Repository
 @using Microsoft.AspNetCore.Authorization
 @inject IMovieRepository MovieRepository
 @rendermode InteractiveServer
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
-@inject WatchlistRepository WatchlistRepository
+@inject IWatchlistRepository WatchlistRepository
+@inject AppDbContext DbContext
 @attribute [Authorize(Roles = "Administrator,User")]
 <PageTitle>Add to Watched</PageTitle>
 
@@ -62,7 +66,9 @@
         }
         else
         {
-            await WatchlistRepository.AddWatchedAsync(userId, movieId);
+            var addToWatchedStrategy = new AddToWatchedStrategy(DbContext);
+            WatchlistService service = new WatchlistService(addToWatchedStrategy, WatchlistRepository);
+            await service.AddToWatched(userId, movieId);
             NavigationManager.NavigateTo("/watchlists");
         }
     }

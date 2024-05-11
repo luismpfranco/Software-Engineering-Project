@@ -10,51 +10,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a2a55d7f-83d7-4bfe-84f9-14331021e02e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial.csproj.AssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial.csproj.CoreCompileInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial1.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/CinemaSocial3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/project.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial.AssemblyInfoInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial.assets.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial.csproj.AssemblyReference.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial.csproj.CoreCompileInputs.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial1.pdb" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/CinemaSocial3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/project.nuget.cache" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024,_22_19_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024__22_19__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_04_2024__22_19__Changes_1.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Observer/IObserver.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Observer/ISubject.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Observer/PopUpNotification.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/API/ProfileAPI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/API/ProfileAPI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Home.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Home.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/MovieDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/MovieDetails.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/CreateAReview.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/CreateAReview.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/OtherReviews.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/OtherReviews.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/Reviews.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/Reviews.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToFavourites.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToFavourites.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatch.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatch.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatched.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/AddToWatched.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/CinemaSocial.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/CinemaSocial.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/Watchlist.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/Watchlist.razor" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/_Imports.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/_Imports.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/ILikeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Repository/Interface/ILikeRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/IMovieService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Repository/Interface/IMovieRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/IReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Repository/Interface/IReviewRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/LikeService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Repository/LikeRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/MovieService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Repository/MovieRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/ReviewService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Repository/ReviewRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Services/WatchlistService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Repository/WatchlistRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Repository/Interface/ILikeRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Repository/Interface/ILikeRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Repository/Interface/IMovieRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Repository/Interface/IMovieRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Repository/Interface/IReviewRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Repository/Interface/IReviewRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Repository/LikeRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Repository/LikeRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Repository/MovieRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Repository/MovieRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Repository/ReviewRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Repository/ReviewRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Repository/WatchlistRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Repository/WatchlistRepository.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/cinema.db" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/cinema.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,49 +63,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/Components/Pages/Watchlists/AddToFavourites.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CinemaSocial/wwwroot/bootstrap/bootstrap.min.css.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df33c7fd7db04a829574707592655c01d82000/26/2a2764ee/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df33c7fd7db04a829574707592655c01d82000/b7/65b29feb/Monitor.cs" root0="SKIP_HIGHLIGHTING" />
@@ -277,6 +205,8 @@
       <workItem from="1715183525404" duration="37000" />
       <workItem from="1715288971710" duration="4029000" />
       <workItem from="1715329310569" duration="535000" />
+      <workItem from="1715342995892" duration="53000" />
+      <workItem from="1715422089813" duration="2146000" />
     </task>
     <task id="LOCAL-00001" summary="add main pages">
       <option name="closed" value="true" />
@@ -302,7 +232,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714922307863</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="adding">
+      <option name="closed" value="true" />
+      <created>1715343046097</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1715343046097</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,7 +254,8 @@
     <MESSAGE value="add js" />
     <MESSAGE value="watchlists, profile and create review done." />
     <MESSAGE value="updating" />
-    <option name="LAST_COMMIT_MESSAGE" value="updating" />
+    <MESSAGE value="adding" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

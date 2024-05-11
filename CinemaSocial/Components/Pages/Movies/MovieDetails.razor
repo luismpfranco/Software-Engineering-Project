@@ -2,11 +2,15 @@
 @using CinemaSocial.Models.Entities
 @using CinemaSocial.Repository
 @using System.Security.Claims
+@using CinemaSocial.Data
+@using CinemaSocial.Patterns
+@using CinemaSocial.Patterns.Strategy
 @using Microsoft.AspNetCore.Authorization
 @inject IMovieRepository MovieRepository
-@inject WatchlistRepository WatchlistRepository
+@inject IWatchlistRepository WatchlistRepository
 @inject IReviewRepository ReviewRepository
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject AppDbContext DbContext
 @rendermode InteractiveServer
 @attribute [Authorize(Roles = "Administrator,User")]
 
@@ -145,7 +149,9 @@
         }
         else
         {
-            await WatchlistRepository.AddToFavouritesAsync(userId, movieId);
+            var addToFavouritesStrategy = new AddToFavouritesStrategy(DbContext);
+            WatchlistService service = new WatchlistService(addToFavouritesStrategy, WatchlistRepository);
+            await service.AddToFavourites(userId, movieId);
             _messageFavourites = "This movie was successfully added to your watchlist Favourites";
             _isFavouritesSuccessful = true;
         }
@@ -161,7 +167,9 @@
         }
         else
         {
-            await WatchlistRepository.AddWatchedAsync(UserId, movieId);
+            var addToWatchedStrategy = new AddToWatchedStrategy(DbContext);
+            WatchlistService service = new WatchlistService(addToWatchedStrategy, WatchlistRepository);
+            await service.AddToWatched(UserId, movieId);
             _messageWatched = "This movie was successfully added to your watchlist Watched";
             _isWatchedSuccessful = true;
         }
@@ -177,7 +185,9 @@
         }
         else
         {
-            await WatchlistRepository.AddToWatchAsync(UserId, movieId);
+            var addToWatchStrategy = new AddToWatchStrategy(DbContext);
+            WatchlistService service = new WatchlistService(addToWatchStrategy, WatchlistRepository);
+            await service.AddToWatch(UserId, movieId);
             _messageToWatch = "This movie was successfully added to your watchlist To Watch";
             _isToWatchSuccessful = true;
         }

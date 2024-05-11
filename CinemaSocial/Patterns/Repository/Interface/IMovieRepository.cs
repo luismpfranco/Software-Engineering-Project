@@ -6,5 +6,4 @@ public interface IMovieRepository
 {
     Task<List<Movie?>> GetMoviesAsync();
     Task<Movie?> GetMovieByIdAsync(Guid id);
-    Task<List<Movie>> SearchMoviesAsync(string searchTerm);
 }

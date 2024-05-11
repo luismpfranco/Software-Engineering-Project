@@ -1,6 +1,9 @@
+using Blazored.Toast;
 using CinemaSocial.Components;
 using CinemaSocial.Components.Pages.Movies;
 using CinemaSocial.Data;
+using CinemaSocial.Patterns;
+using CinemaSocial.Patterns.Strategy;
 using CinemaSocial.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -30,12 +33,16 @@ builder.Services.AddControllers();
 
 builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri("http://localhost:7237") });
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
-builder.Services.AddScoped<WatchlistRepository>();
+builder.Services.AddScoped<IWatchlistRepository, WatchlistRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<MovieDetails>();
-builder.Services.AddScoped<MovieRepository>();
-builder.Services.AddScoped < ReviewRepository>();
+builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ILikeRepository, LikeRepository>();
+builder.Services.AddScoped<WatchlistService>();
+builder.Services.AddScoped<IWatchlistStrategy, AddToFavouritesStrategy>();
+builder.Services.AddScoped<IWatchlistStrategy, AddToWatchStrategy>();
+builder.Services.AddScoped<IWatchlistStrategy, AddToWatchedStrategy>();
 
 var app = builder.Build();
 
