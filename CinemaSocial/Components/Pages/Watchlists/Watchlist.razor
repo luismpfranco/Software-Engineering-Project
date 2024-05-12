@@ -11,7 +11,7 @@
 @inject IMovieRepository MovieRepository
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
-@inject WatchlistService WatchlistService
+@inject IWatchlistService WatchlistService
 @inject AppDbContext DbContext
 @attribute [Authorize(Roles = "Administrator,User")]
 @rendermode InteractiveServer

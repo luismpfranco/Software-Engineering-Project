@@ -9,21 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2a55d7f-83d7-4bfe-84f9-14331021e02e" name="Changes" comment="adding strategy and command patterns">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/dataSources/140a7ad8-c8c8-4727-975c-dc974e977657.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/dataSources/140a7ad8-c8c8-4727-975c-dc974e977657.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/Login.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/Login.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/SignUp.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Account/SignUp.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/CreateAReview.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/CreateAReview.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/OtherReviews.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/OtherReviews.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/Reviews.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Reviews/Reviews.razor" afterDir="false" />
+    <list default="true" id="a2a55d7f-83d7-4bfe-84f9-14331021e02e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/IWatchlistService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CinemaSocial/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/MovieDetails.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Movies/MovieDetails.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/Watchlist.razor" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Components/Pages/Watchlists/Watchlist.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Patterns/Command/RemoveFromFavouritesCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Command/RemoveFromFavouritesCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Patterns/Command/RemoveFromWatchCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Command/RemoveFromWatchCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Patterns/Command/RemoveFromWatchedCommand.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Command/RemoveFromWatchedCommand.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Patterns/Repository/Interface/IReviewRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Repository/Interface/IReviewRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Patterns/Strategy/AddToFavouritesStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Strategy/AddToFavouritesStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Patterns/Strategy/AddToWatchStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Strategy/AddToWatchStrategy.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CinemaSocial/Patterns/Strategy/AddToWatchedStrategy.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/Strategy/AddToWatchedStrategy.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CinemaSocial/Patterns/WatchlistService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Patterns/WatchlistService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CinemaSocial/cinema.db" beforeDir="false" afterPath="$PROJECT_DIR$/CinemaSocial/cinema.db" afterDir="false" />
     </list>
@@ -63,6 +54,7 @@
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/Components/Pages/Watchlists/AddToFavourites.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="mock:///Users/luismpfranco/Desktop/3.º Ano/2.º Semestre/ES/Projeto/Fase 1/Projeto_ES_Fase1/CinemaSocial/CinemaSocial/Components/_Imports.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/CinemaSocial/wwwroot/bootstrap/bootstrap.min.css.map" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df33c7fd7db04a829574707592655c01d82000/26/2a2764ee/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -207,7 +199,8 @@
       <workItem from="1715329310569" duration="535000" />
       <workItem from="1715342995892" duration="53000" />
       <workItem from="1715422089813" duration="2146000" />
-      <workItem from="1715426254687" duration="12250000" />
+      <workItem from="1715426254687" duration="13409000" />
+      <workItem from="1715510135670" duration="1907000" />
     </task>
     <task id="LOCAL-00001" summary="add main pages">
       <option name="closed" value="true" />
@@ -249,7 +242,31 @@
       <option name="project" value="LOCAL" />
       <updated>1715438887161</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="updating">
+      <option name="closed" value="true" />
+      <created>1715442819097</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1715442819097</updated>
+    </task>
+    <task id="LOCAL-00007" summary="updating">
+      <option name="closed" value="true" />
+      <created>1715442830896</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1715442830896</updated>
+    </task>
+    <task id="LOCAL-00008" summary="updating again">
+      <option name="closed" value="true" />
+      <created>1715443962661</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1715443962661</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,10 +279,11 @@
     <MESSAGE value="add main pages" />
     <MESSAGE value="add js" />
     <MESSAGE value="watchlists, profile and create review done." />
-    <MESSAGE value="updating" />
     <MESSAGE value="adding" />
     <MESSAGE value="adding strategy and command patterns" />
-    <option name="LAST_COMMIT_MESSAGE" value="adding strategy and command patterns" />
+    <MESSAGE value="updating" />
+    <MESSAGE value="updating again" />
+    <option name="LAST_COMMIT_MESSAGE" value="updating again" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

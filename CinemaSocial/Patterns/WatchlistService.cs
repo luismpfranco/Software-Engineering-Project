@@ -4,7 +4,7 @@ using CinemaSocial.Repository;
 
 namespace CinemaSocial.Patterns;
 
-public class WatchlistService
+public class WatchlistService: IWatchlistService
 {
     private readonly IWatchlistStrategy _strategy;
 

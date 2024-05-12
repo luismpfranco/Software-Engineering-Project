@@ -150,7 +150,7 @@
         }
         else
         {
-            WatchlistService service = new WatchlistService(addToFavouritesStrategy);
+            IWatchlistService service = new WatchlistService(addToFavouritesStrategy);
             await service.AddToFavourites(userId, movieId);
             _messageFavourites = "This movie was successfully added to your watchlist Favourites";
             _isFavouritesSuccessful = true;
@@ -168,7 +168,7 @@
         }
         else
         {
-            WatchlistService service = new WatchlistService(addToWatchedStrategy);
+            IWatchlistService service = new WatchlistService(addToWatchedStrategy);
             await service.AddToWatched(UserId, movieId);
             _messageWatched = "This movie was successfully added to your watchlist Watched";
             _isWatchedSuccessful = true;
@@ -186,7 +186,7 @@
         }
         else
         {
-            WatchlistService service = new WatchlistService(addToWatchStrategy);
+            IWatchlistService service = new WatchlistService(addToWatchStrategy);
             await service.AddToWatch(UserId, movieId);
             _messageToWatch = "This movie was successfully added to your watchlist To Watch";
             _isToWatchSuccessful = true;

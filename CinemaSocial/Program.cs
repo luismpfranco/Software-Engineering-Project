@@ -40,7 +40,7 @@ builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<MovieRepository>();
 builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
 builder.Services.AddScoped<ILikeRepository, LikeRepository>();
-builder.Services.AddScoped<WatchlistService>();
+builder.Services.AddScoped<IWatchlistService, WatchlistService>();
 builder.Services.AddScoped<IWatchlistStrategy, AddToFavouritesStrategy>();
 builder.Services.AddScoped<IWatchlistStrategy, AddToWatchStrategy>();
 builder.Services.AddScoped<IWatchlistStrategy, AddToWatchedStrategy>();
